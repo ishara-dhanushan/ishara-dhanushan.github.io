@@ -159,6 +159,14 @@
                   />
                 </svg>
               </a>
+              <a
+                href="./assets/Ishara_Dhanushan_CV.pdf"
+                download="Ishara_Dhanushan_CV.pdf"
+                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300 flex items-center"
+              >
+                Download CV
+                <i class="fas fa-download ml-2 text-sm"></i>
+              </a>
             </div>
           </div>
 
@@ -169,7 +177,7 @@
                 class="w-96 h-96 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg transform transition duration-500 hover:scale-105"
               >
                 <img
-                  src="./assets/WhatsApp%20Image%202025-03-27%20at%207.17.43%20PM.jpeg"
+                  src="./assets/ProfileImage.jpg"
                   alt="Profile Picture"
                   class="w-full h-full object-cover transform scale-150 object-center"
                 />
@@ -676,136 +684,632 @@
       </div>
     </section>
 
-    <section class="py-12" id="projects">
-      <div class="max-w-5xl mx-auto px-10">
-        <h2 class="text-4xl font-bold text-center mb-12">
+    <section class="py-16 bg-gray-50" id="projects">
+      <div class="max-w-7xl mx-auto px-10">
+        <h2 class="text-4xl font-bold text-center mb-3">
           🌟 Featured Projects
         </h2>
+        <p class="text-center text-gray-500 mb-12 text-sm">
+          A selection of things I've built across web and mobile
+        </p>
 
-        <!-- Project Cards -->
-        <div class="flex flex-col gap-10">
-          <!-- Project Card -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Kochi Guru Pizza -->
           <div
-            class="bg-blue-50 hover:bg-blue-100 shadow-xl rounded-2xl overflow-hidden transition-transform hover:scale-[1.01] duration-300"
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
           >
-            <div class="md:flex">
+            <div
+              class="h-48 bg-linear-to-br from-orange-50 to-red-50 overflow-hidden"
+            >
               <img
-                class="w-full md:w-1/2 object-cover h-64 md:h-auto p-5 rounded-4xl"
-                src="./assets/ProjectScreenshots/Dhanu's%20Cake%20Mart.png"
-                alt="Dhanu's Cake Mart Screenshot"
+                src="./assets/ProjectScreenshots/KochiGuruPizza.png"
+                alt="Kochi Guru Pizza Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
               />
-              <div class="p-6 flex flex-col gap-4 md:w-1/2">
-                <h3 class="text-2xl font-semibold">🎂 Dhanu's Cake Mart</h3>
-                <p>
-                  A custom cake ordering system with beautiful UI for selecting,
-                  customizing, and placing cake orders online.
-                </p>
-                <div>
-                  <span class="font-semibold">Technologies:</span>
-                  HTML, CSS, JavaScript, PHP, MySQL
-                </div>
-                <div>
-                  <span class="font-semibold">Role:</span>
-                  Full-stack Developer (UI/UX, Backend, DB)
-                </div>
-                <div class="flex gap-4">
-                  <a
-                    href="https://github.com/isharadh2002/dhanuscakemart.lk"
-                    target="_blank"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-                    >GitHub</a
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  Kochi Guru Pizza
+                </h3>
+                <div class="flex flex-col items-end gap-1">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Web</span
                   >
-                  <a
-                    href="https://github.com/isharadh2002/dhanuscakemart.lk"
-                    target="_blank"
-                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-                    >Live Site</a
+                  <span
+                    class="shrink-0 text-xs bg-blue-50 text-blue-600 border border-blue-100 px-2 py-0.5 rounded-full"
+                    >Client · Ongoing</span
                   >
                 </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Real-world pizza shop web app with JWT auth, protected
+                endpoints, menu management, cart, order processing, and admin
+                dashboard.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Next.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Express</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >MongoDB</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/isharadh2002/kochi-guru-pizza"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+                <a
+                  href="https://kochi-guru-pizza.vercel.app"
+                  target="_blank"
+                  class="text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >Live Demo</a
+                >
               </div>
             </div>
           </div>
 
-          <!-- FindYourMechanic -->
+          <!-- BrewHub -->
           <div
-            class="bg-blue-50 hover:bg-blue-100 shadow-xl rounded-2xl overflow-hidden transition-transform hover:scale-[1.01] duration-300"
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
           >
-            <div class="md:flex">
+            <div
+              class="h-48 bg-linear-to-br from-amber-50 to-yellow-50 overflow-hidden"
+            >
               <img
-                class="w-full md:w-1/2 object-cover h-64 md:h-auto p-5 rounded-4xl"
-                src="./assets/ProjectScreenshots/FindYourMechanic.png"
-                alt="FindYourMechanic Screenshot"
+                src="./assets/ProjectScreenshots/BrewHub.png"
+                alt="BrewHub Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
               />
-              <div class="p-6 flex flex-col gap-4 md:w-1/2">
-                <h3 class="text-2xl font-semibold">🔧 FindYourMechanic.lk</h3>
-                <p>
-                  A vehicle breakdown assistance platform to locate nearby
-                  mechanics. Includes customer, mechanic, and admin roles.
-                </p>
-                <div>
-                  <span class="font-semibold">Technologies:</span>
-                  HTML, CSS, JavaScript, PHP, MySQL
-                </div>
-                <div>
-                  <span class="font-semibold">Role:</span>
-                  Full-stack Developer (UI, Auth, Booking System)
-                </div>
-                <div class="flex gap-4">
-                  <a
-                    href="https://github.com/isharadh2002/findyourmechanic.lk"
-                    target="_blank"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-                    >GitHub</a
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">BrewHub</h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Web</span
                   >
-                  <a
-                    href="https://github.com/isharadh2002/findyourmechanic.lk"
-                    target="_blank"
-                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-                    >Live Site</a
+                  <span
+                    class="shrink-0 text-xs bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-full"
+                    >Individual</span
                   >
                 </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Full-stack coffee shop platform with responsive UI, menu
+                browsing, cart management, order placement, and secure
+                authentication.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >MERN</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Tailwind CSS</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/isharadh2002/BrewHub"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+                <a
+                  href="https://brew-hub.vercel.app"
+                  target="_blank"
+                  class="text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Advertisement.lk -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-blue-50 to-blue-100 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/Advertisement.lk.png"
+                alt="Advertisement.lk Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  Advertisement.lk
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Web</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-full"
+                    >Individual</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                A modern classified advertisement platform with secure
+                authentication, ad management for buyers/sellers, and integrated
+                ad boosting via Stripe/PayPal.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >React.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Node.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Express</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >MongoDB</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/ishara-dhanushan/Advertisement.lk"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
               </div>
             </div>
           </div>
 
           <!-- FuelWise.lk -->
           <div
-            class="bg-blue-50 hover:bg-blue-100 shadow-xl rounded-2xl overflow-hidden transition-transform hover:scale-[1.01] duration-300"
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
           >
-            <div class="md:flex">
+            <div
+              class="h-48 bg-linear-to-br from-blue-50 to-indigo-50 overflow-hidden"
+            >
               <img
-                class="w-full md:w-1/2 object-cover h-64 md:h-auto rounded-4xl p-5"
                 src="./assets/ProjectScreenshots/FuelWise.lk.png"
                 alt="FuelWise Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
               />
-              <div class="p-6 flex flex-col gap-4 md:w-1/2">
-                <h3 class="text-2xl font-semibold">⛽ FuelWise.lk</h3>
-                <p>
-                  A fuel quota management system with admin, fuel station, and
-                  mobile app interfaces. Built using modern full-stack tech.
-                </p>
-                <div>
-                  <span class="font-semibold">Technologies:</span>
-                  Spring Boot, React, MySQL, Flutter
-                </div>
-                <div>
-                  <span class="font-semibold">Role:</span>
-                  Backend Developer (Spring Boot APIs, DB Design)
-                </div>
-                <div class="flex gap-4">
-                  <a
-                    href="https://github.com/MininduBimsara/FuelWiseLK"
-                    target="_blank"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-                    >GitHub</a
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  FuelWise.lk
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Web</span
                   >
-                  <a
-                    href="https://github.com/MininduBimsara/FuelWiseLK"
-                    target="_blank"
-                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-                    >Live Site</a
+                  <span
+                    class="shrink-0 text-xs bg-green-50 text-green-600 border border-green-100 px-2 py-0.5 rounded-full"
+                    >Group</span
                   >
                 </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Multi-role fuel quota management platform with real-time quota
+                tracking, station-wise updates, and mobile app for users and
+                admins.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Spring Boot</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >React</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Flutter</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >MySQL</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/MininduBimsara/FuelWiseLK"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+                <a
+                  href="https://drive.google.com/file/d/1sn7Q4o_-nY2kPUJ3TvIKRlEVGyEBCRq5/view?usp=sharing"
+                  target="_blank"
+                  class="text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >Demo Video</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-Role User Sign-Up Form -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-indigo-50 to-indigo-100 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/MultiRoleRegistration.png"
+                alt="Multi-Role User Registration Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  Multi-Role User Registration
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Web</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-full"
+                    >Individual</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Full-stack registration system with role-based access control,
+                following SOLID principles and industry-standard design
+                patterns.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Spring Boot</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Next.js</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Java</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >MySQL</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/ishara-dhanushan/Multi-Role-User-Sign-Up-Form"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- FindYourMechanic -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-slate-50 to-gray-100 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/FindYourMechanic.png"
+                alt="FindYourMechanic Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  FindYourMechanic.lk
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Web</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-green-50 text-green-600 border border-green-100 px-2 py-0.5 rounded-full"
+                    >Group</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Vehicle breakdown assistance platform where customers find and
+                book nearby mechanics, with multi-role system and admin
+                oversight.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >HTML/CSS/JS</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >PHP</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >MySQL</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/isharadh2002/findyourmechanic.lk"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Finance Tracker App -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-emerald-50 to-emerald-100 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/FinanceTrackerEdited.jpg"
+                alt="Finance Tracker App Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  Finance Tracker App
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Mobile</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-full"
+                    >Individual</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                A personal finance management application featuring real-time
+                data synchronization, budget planning, and detailed financial
+                insights.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Flutter</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Firebase</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Provider</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/ishara-dhanushan/Finance-Tracker-App"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- TaskMaster -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-violet-50 to-purple-50 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/TaskMasterEdited.png"
+                alt="TaskMaster Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  TaskMaster
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Mobile</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-full"
+                    >Individual</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Lightweight To-Do app with Zustand state management and
+                AsyncStorage persistence. Supports task creation, completion
+                tracking, and deletion.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >React Native CLI</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Zustand</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >AsyncStorage</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/isharadh2002/TaskMaster"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+                <a
+                  href="https://drive.google.com/file/d/1FLg2j1QwB4jEsPtuwBT1iIhbkP2togTl/view?usp=sharing"
+                  target="_blank"
+                  class="text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >Demo Video</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- HabitBuddy -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-emerald-50 to-teal-50 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/HabitBuddyEdited.png"
+                alt="HabitBuddy Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">
+                  HabitBuddy
+                </h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >Mobile</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-full"
+                    >Individual</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Habit tracking app with auth, tab-based navigation, and daily
+                habit management. Persistent local storage for seamless data
+                retention.
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >React Native CLI</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >Zustand</span
+                >
+                <span
+                  class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md"
+                  >AsyncStorage</span
+                >
+              </div>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://github.com/isharadh2002/HabitBuddy"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >GitHub</a
+                >
+                <a
+                  href="https://drive.google.com/file/d/1uY8eC23ih-CewrKCpV3h7D3Txw_u-NI3/view?usp=sharing"
+                  target="_blank"
+                  class="text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >Demo Video</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- BookHub -->
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <div
+              class="h-48 bg-linear-to-br from-sky-50 to-blue-50 overflow-hidden"
+            >
+              <img
+                src="./assets/ProjectScreenshots/BookHub.png"
+                alt="BookHub Screenshot"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-3 flex-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-base font-semibold text-gray-800">BookHub</h3>
+                <div class="flex flex-wrap items-center justify-end gap-1.5">
+                  <span
+                    class="shrink-0 text-xs bg-slate-50 text-slate-500 border border-slate-100 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold"
+                    >UI/UX</span
+                  >
+                  <span
+                    class="shrink-0 text-xs bg-green-50 text-green-600 border border-green-100 px-2 py-0.5 rounded-full"
+                    >Group</span
+                  >
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 leading-relaxed flex-1">
+                Interactive UI prototype for a modern library management system
+                with intuitive navigation, clean dashboards, and book borrowing
+                workflows.
+              </p>
+              <div class="flex gap-3 pt-1">
+                <a
+                  href="https://www.figma.com/design/AL9NglUXMEOxTPeL9Si6tb/Library-Management-System--User-Interfaces-?node-id=607-9&t=RdTpcTJzxIp9KsX8-1"
+                  target="_blank"
+                  class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition"
+                  >Figma Design</a
+                >
               </div>
             </div>
           </div>
@@ -1184,7 +1688,7 @@
                   />
                   <circle cx="12" cy="8.625" r="2.25" />
                 </svg>
-                <span class="text-gray-600 pl-2">City, Country</span>
+                <span class="text-gray-600 pl-2">Kurunegala, Sri Lanka</span>
               </li>
             </ul>
 
@@ -1233,7 +1737,7 @@
                 </a>
 
                 <!-- Youtube -->
-                <a
+                <!-- <a
                   href="https://www.youtube.com/@isharadhanushan2002"
                   target="_blank"
                   class="p-1 bg-blue-100 rounded-full hover:bg-blue-200 transition"
@@ -1243,7 +1747,7 @@
                     src="https://freepnglogo.com/images/all_img/1701522088youtube-square-logo-png-hd.png"
                     alt="Youtube Logo"
                   />
-                </a>
+                </a> -->
 
                 <!-- Facebook -->
                 <a
@@ -1283,7 +1787,7 @@
       <script src="./scripts/contact_form.js"></script>
     </section>
 
-    <footer class="bg-gradient-to-r from-blue-800 to-blue-500 text-white">
+    <footer class="bg-linear-to-r from-blue-800 to-blue-500 text-white">
       <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col flex-wrap">
         <div
           class="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0 md:space-x-12 py-8"
@@ -1399,7 +1903,7 @@
                     />
                   </svg>
                 </a>
-                <a
+                <!-- <a
                   href="https://www.youtube.com/@isharadhanushan2002"
                   target="_blank"
                   class="hover:text-blue-900"
@@ -1410,7 +1914,7 @@
                       d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
                     />
                   </svg>
-                </a>
+                </a> -->
               </div>
             </div>
           </div>
