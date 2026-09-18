@@ -102,17 +102,8 @@ export function MediumPostsFeed() {
 
   return (
     <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post, index) => (
-        <div
-          key={post.id}
-          className={`h-full ${
-            index >= 4
-              ? "hidden lg:block"
-              : index >= 3
-                ? "hidden sm:block lg:block"
-                : ""
-          }`}
-        >
+      {posts.map((post) => (
+        <div key={post.id} className="h-full">
           <MediumPostCard post={post} />
         </div>
       ))}
