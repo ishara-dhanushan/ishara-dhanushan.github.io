@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudyMetric.tsx
 import { HoverCard } from "@/components/motion/HoverCard";
 
 interface CaseStudyMetricProps {

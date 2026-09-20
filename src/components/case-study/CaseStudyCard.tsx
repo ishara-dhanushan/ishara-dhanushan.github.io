@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudyCard.tsx
 import type { ReactNode } from "react";
 import { HoverCard } from "@/components/motion/HoverCard";
 

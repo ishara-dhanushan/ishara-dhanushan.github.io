@@ -1,3 +1,4 @@
+// src/app/projects/kochi-guru-pizza/page.tsx
 import type { Metadata } from "next";
 import { CaseStudyCard } from "@/components/case-study/CaseStudyCard";
 import { CaseStudyFlow } from "@/components/case-study/CaseStudyFlow";

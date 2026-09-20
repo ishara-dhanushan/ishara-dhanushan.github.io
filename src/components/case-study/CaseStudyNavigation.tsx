@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudyNavigation.tsx
 "use client";
 
 import Link from "next/link";

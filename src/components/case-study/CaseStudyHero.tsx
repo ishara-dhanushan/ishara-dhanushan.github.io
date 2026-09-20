@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudyHero.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";

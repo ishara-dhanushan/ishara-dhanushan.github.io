@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudyFlow.tsx
 interface FlowItem {
   label: string;
   detail?: string;

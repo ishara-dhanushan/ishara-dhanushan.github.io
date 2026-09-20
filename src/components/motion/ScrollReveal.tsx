@@ -1,3 +1,4 @@
+// src/components/motion/ScrollReveal.tsx
 "use client";
 
 import { motion, useAnimationControls, useReducedMotion } from "framer-motion";

@@ -1,3 +1,4 @@
+// src/app/projects/constructpro/page.tsx
 import type { Metadata } from "next";
 import { CaseStudyCard } from "@/components/case-study/CaseStudyCard";
 import { CaseStudyCompare } from "@/components/case-study/CaseStudyCompare";

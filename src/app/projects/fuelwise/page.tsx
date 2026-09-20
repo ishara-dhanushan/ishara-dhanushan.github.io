@@ -1,3 +1,4 @@
+// src/app/projects/fuelwise/page.tsx
 import type { Metadata } from "next";
 import { CaseStudyCard } from "@/components/case-study/CaseStudyCard";
 import { CaseStudyFlow } from "@/components/case-study/CaseStudyFlow";
@@ -190,9 +191,9 @@ export default function FuelWiseCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Station context matters">
-            The mobile flow retrieves the logged-in user's station ID so quota
-            updates and transactions can be associated with the correct fuel
-            station.
+            The mobile flow retrieves the logged-in user&apos;s station ID so
+            quota updates and transactions can be associated with the correct
+            fuel station.
           </CaseStudyCard>
 
           <CaseStudyCard title="Owner context matters too">
@@ -238,9 +239,9 @@ export default function FuelWiseCaseStudyPage() {
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
             The extra service introduced a real integration boundary: data could
-            be unavailable, malformed, or different from the user's input. That
-            made the registration flow closer to a distributed workflow than a
-            single-database form submission.
+            be unavailable, malformed, or different from the user&apos;s input.
+            That made the registration flow closer to a distributed workflow
+            than a single-database form submission.
           </p>
         </div>
       </CaseStudySection>

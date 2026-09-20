@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudySection.tsx
 import type { ReactNode } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";

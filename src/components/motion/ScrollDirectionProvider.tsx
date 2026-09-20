@@ -18,31 +18,28 @@ type ScrollDirectionRef = {
 };
 
 const SCROLL_POSITION_KEY = "portfolio-scroll-position";
+
 const ScrollDirectionContext = createContext<ScrollDirectionRef | null>(null);
 
 export function ScrollDirectionProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   const directionRef = useRef<ScrollDirection>("down");
+
   const lastScrollYRef = useRef(0);
+
   const frameRef = useRef<number | null>(null);
 
-  const previousPathnameRef = useRef(pathname);
   const hasMountedPathRef = useRef(false);
-
-  const routeChanged = previousPathnameRef.current !== pathname;
-
-  if (routeChanged) {
-    directionRef.current = "down";
-    lastScrollYRef.current = 0;
-    previousPathnameRef.current = pathname;
-  }
 
   useLayoutEffect(() => {
     if (!hasMountedPathRef.current) {
       hasMountedPathRef.current = true;
       return;
     }
+
+    directionRef.current = "down";
+    lastScrollYRef.current = 0;
 
     window.scrollTo({
       top: 0,
@@ -65,6 +62,8 @@ export function ScrollDirectionProvider({ children }: { children: ReactNode }) {
           left: 0,
           behavior: "auto",
         });
+
+        directionRef.current = "down";
 
         lastScrollYRef.current = 0;
       });
@@ -93,6 +92,7 @@ export function ScrollDirectionProvider({ children }: { children: ReactNode }) {
     } catch {}
 
     let restoreFrame = 0;
+
     let restoreFrameId: number | null = null;
 
     // Restore content that was already above the viewport after reload.
@@ -109,6 +109,7 @@ export function ScrollDirectionProvider({ children }: { children: ReactNode }) {
               element.dataset.scrollRevealRestored = "true";
 
               element.style.opacity = "1";
+
               element.style.transform = "translateY(0px)";
             }
           });

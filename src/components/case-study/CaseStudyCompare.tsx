@@ -1,3 +1,4 @@
+// src/components/case-study/CaseStudyCompare.tsx
 import { HoverCard } from "@/components/motion/HoverCard";
 
 interface CompareSide {
