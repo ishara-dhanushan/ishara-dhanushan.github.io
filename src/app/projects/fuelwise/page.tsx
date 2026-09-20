@@ -40,19 +40,29 @@ export default function FuelWiseCaseStudyPage() {
         description="FuelWise was built around a simple business idea—track a vehicle's fuel allowance—but that rule had to remain consistent across customer, station, admin, and mobile workflows."
       >
         <div className="grid gap-6 md:grid-cols-3">
-          <CaseStudyCard eyebrow="Vehicle owner" title="See vehicles and remaining quota">
-            Customer-facing screens provide registered vehicle information, quota data,
-            QR access, and owner-specific vehicle views.
+          <CaseStudyCard
+            eyebrow="Vehicle owner"
+            title="See vehicles and remaining quota"
+          >
+            Customer-facing screens provide registered vehicle information,
+            quota data, QR access, and owner-specific vehicle views.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Fuel station" title="Process fueling activity">
-            Station workflows retrieve vehicle quota, apply fuel usage, and maintain
-            transaction records tied to both the vehicle and the station.
+          <CaseStudyCard
+            eyebrow="Fuel station"
+            title="Process fueling activity"
+          >
+            Station workflows retrieve vehicle quota, apply fuel usage, and
+            maintain transaction records tied to both the vehicle and the
+            station.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Administrator" title="Manage the shared system">
-            Admin screens cover users, stations, vehicles, fuel quota configuration, and
-            operational oversight.
+          <CaseStudyCard
+            eyebrow="Administrator"
+            title="Manage the shared system"
+          >
+            Admin screens cover users, stations, vehicles, fuel quota
+            configuration, and operational oversight.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -100,33 +110,45 @@ export default function FuelWiseCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           <CaseStudyCard eyebrow="Backend" title="Quota and station workflows">
-            Worked on fuel-station update/delete operations, fuel quota updates, station
-            and owner lookup endpoints, exception handling, and vehicle persistence.
+            Worked on fuel-station update/delete operations, fuel quota updates,
+            station and owner lookup endpoints, exception handling, and vehicle
+            persistence.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Transactions" title="Station transaction integration">
-            Implemented station-specific transaction retrieval and connected vehicle
-            details into transaction presentation for the fuel-station dashboard.
+          <CaseStudyCard
+            eyebrow="Transactions"
+            title="Station transaction integration"
+          >
+            Implemented station-specific transaction retrieval and connected
+            vehicle details into transaction presentation for the fuel-station
+            dashboard.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="React" title="Role-focused dashboards">
-            Contributed customer vehicle filtering, fuel-station dashboards, routing,
-            profile screens, transaction cards, navigation, and form validation.
+            Contributed customer vehicle filtering, fuel-station dashboards,
+            routing, profile screens, transaction cards, navigation, and form
+            validation.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Flutter" title="Quota operator flow">
-            Worked on the fuel-quota screen, station ID retrieval, fuel-type selection,
-            backend quota updates, registration screens, and mobile validation fixes.
+            Worked on the fuel-quota screen, station ID retrieval, fuel-type
+            selection, backend quota updates, registration screens, and mobile
+            validation fixes.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Integration" title="Dynamic backend configuration">
-            Replaced repeated server addresses with shared host configuration in React and
-            Flutter so development environments could change without editing every request.
+          <CaseStudyCard
+            eyebrow="Integration"
+            title="Dynamic backend configuration"
+          >
+            Replaced repeated server addresses with shared host configuration in
+            React and Flutter so development environments could change without
+            editing every request.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Maintenance" title="Cross-boundary debugging">
-            Fixed integration issues in vehicle responses, station retrieval, quota
-            updates, merged routing, package/module setup, and mobile overflow behavior.
+            Fixed integration issues in vehicle responses, station retrieval,
+            quota updates, merged routing, package/module setup, and mobile
+            overflow behavior.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -168,13 +190,15 @@ export default function FuelWiseCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Station context matters">
-            The mobile flow retrieves the logged-in user's station ID so quota updates
-            and transactions can be associated with the correct fuel station.
+            The mobile flow retrieves the logged-in user's station ID so quota
+            updates and transactions can be associated with the correct fuel
+            station.
           </CaseStudyCard>
 
           <CaseStudyCard title="Owner context matters too">
-            Customer dashboard vehicle lists are filtered using the current owner ID so a
-            user sees their own records instead of a global vehicle collection.
+            Customer dashboard vehicle lists are filtered using the current
+            owner ID so a user sees their own records instead of a global
+            vehicle collection.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -188,8 +212,7 @@ export default function FuelWiseCaseStudyPage() {
           items={[
             {
               label: "Owner submits vehicle details",
-              detail:
-                "Registration begins inside the FuelWise customer flow.",
+              detail: "Registration begins inside the FuelWise customer flow.",
             },
             {
               label: "Query DMT simulation",
@@ -214,10 +237,10 @@ export default function FuelWiseCaseStudyPage() {
             Why this mattered
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-            The extra service introduced a real integration boundary: data could be
-            unavailable, malformed, or different from the user's input. That made the
-            registration flow closer to a distributed workflow than a single-database form
-            submission.
+            The extra service introduced a real integration boundary: data could
+            be unavailable, malformed, or different from the user's input. That
+            made the registration flow closer to a distributed workflow than a
+            single-database form submission.
           </p>
         </div>
       </CaseStudySection>
@@ -228,19 +251,28 @@ export default function FuelWiseCaseStudyPage() {
         description="A practical multi-client problem was keeping React and Flutter pointed at the correct backend while the development host changed."
       >
         <div className="grid gap-6 md:grid-cols-3">
-          <CaseStudyCard eyebrow="Before" title="Host values repeated in requests">
-            API URLs were spread across individual calls, so moving the backend required
-            editing several files and created a risk of stale addresses.
+          <CaseStudyCard
+            eyebrow="Before"
+            title="Host values repeated in requests"
+          >
+            API URLs were spread across individual calls, so moving the backend
+            required editing several files and created a risk of stale
+            addresses.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Change" title="Shared host configuration">
-            I introduced a central server-host value for the React app and a shared backend
-            URL constant for Flutter, then migrated requests to use them.
+            I introduced a central server-host value for the React app and a
+            shared backend URL constant for Flutter, then migrated requests to
+            use them.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Result" title="One place to change environments">
-            Moving between local machines or network addresses became a configuration
-            change instead of a search-and-replace exercise across the codebase.
+          <CaseStudyCard
+            eyebrow="Result"
+            title="One place to change environments"
+          >
+            Moving between local machines or network addresses became a
+            configuration change instead of a search-and-replace exercise across
+            the codebase.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -252,23 +284,26 @@ export default function FuelWiseCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Tighten backend authorization">
-            I would enforce role and ownership rules explicitly at each sensitive endpoint
-            instead of relying heavily on role separation in the UI.
+            I would enforce role and ownership rules explicitly at each
+            sensitive endpoint instead of relying heavily on role separation in
+            the UI.
           </CaseStudyCard>
 
           <CaseStudyCard title="Move all secrets into runtime configuration">
-            External-service credentials and environment-specific values should be stored
-            outside source control and injected through environment or secret management.
+            External-service credentials and environment-specific values should
+            be stored outside source control and injected through environment or
+            secret management.
           </CaseStudyCard>
 
           <CaseStudyCard title="Add automated tests around the business rules">
-            Service unit tests, repository integration tests, and E2E scenarios should
-            cover registration, quota mutation, and transaction creation.
+            Service unit tests, repository integration tests, and E2E scenarios
+            should cover registration, quota mutation, and transaction creation.
           </CaseStudyCard>
 
           <CaseStudyCard title="Formalize contracts between clients and services">
-            Typed request/response contracts and a shared error model would reduce hidden
-            assumptions between React, Flutter, the main API, and the DMT simulation.
+            Typed request/response contracts and a shared error model would
+            reduce hidden assumptions between React, Flutter, the main API, and
+            the DMT simulation.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -280,29 +315,35 @@ export default function FuelWiseCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Integration bugs rarely belong to one file">
-            A wrong identifier, response shape, or environment URL can look like a frontend
-            bug even when the real failure sits in the backend contract.
+            A wrong identifier, response shape, or environment URL can look like
+            a frontend bug even when the real failure sits in the backend
+            contract.
           </CaseStudyCard>
 
           <CaseStudyCard title="Shared configuration is infrastructure">
-            Centralizing backend addresses looked small, but it removed repeated edits from
-            dozens of requests and made multi-client development much easier.
+            Centralizing backend addresses looked small, but it removed repeated
+            edits from dozens of requests and made multi-client development much
+            easier.
           </CaseStudyCard>
 
           <CaseStudyCard title="Role-specific UI is not enough">
-            Customer, station, and administrator experiences need matching data-access rules
-            in the backend, not only different screens.
+            Customer, station, and administrator experiences need matching
+            data-access rules in the backend, not only different screens.
           </CaseStudyCard>
 
           <CaseStudyCard title="Older projects are useful design reviews">
-            Revisiting FuelWise made security, testing, and configuration improvements
-            obvious—practices I now introduce much earlier in newer projects.
+            Revisiting FuelWise made security, testing, and configuration
+            improvements obvious—practices I now introduce much earlier in newer
+            projects.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
 
       <CaseStudyNavigation
-        previous={{ href: "/projects/kochi-guru-pizza", title: "Kochi Guru Pizza" }}
+        previous={{
+          href: "/projects/kochi-guru-pizza",
+          title: "Kochi Guru Pizza",
+        }}
       />
     </main>
   );

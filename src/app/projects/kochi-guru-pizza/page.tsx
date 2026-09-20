@@ -49,17 +49,20 @@ export default function KochiGuruPizzaCaseStudyPage() {
         <div className="grid gap-6 md:grid-cols-3">
           <CaseStudyCard eyebrow="Customer" title="Browse a real menu">
             Public pages expose categories, menu-item details, availability,
-            descriptions, pricing, and image galleries in a responsive interface.
+            descriptions, pricing, and image galleries in a responsive
+            interface.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Staff" title="Manage content without code">
-            Authenticated staff can create and edit menu items, change availability,
-            manage pricing, and maintain uploaded images through the dashboard.
+            Authenticated staff can create and edit menu items, change
+            availability, manage pricing, and maintain uploaded images through
+            the dashboard.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Platform" title="Keep the product deployable">
-            Frontend and backend are independently buildable, containerized for local
-            development, checked by CI, and structured around clear service boundaries.
+            Frontend and backend are independently buildable, containerized for
+            local development, checked by CI, and structured around clear
+            service boundaries.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -107,35 +110,37 @@ export default function KochiGuruPizzaCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           <CaseStudyCard title="Project and data foundation">
-            Initialized the frontend and backend, configured MongoDB, designed the user
-            and menu models, and evolved indexes as the product grew.
+            Initialized the frontend and backend, configured MongoDB, designed
+            the user and menu models, and evolved indexes as the product grew.
           </CaseStudyCard>
 
           <CaseStudyCard title="Authentication">
             Built local registration/login, Google OAuth, JWT access tokens,
-            refresh-token rotation, multiple active sessions, logout, route protection,
-            and client-side auth state.
+            refresh-token rotation, multiple active sessions, logout, route
+            protection, and client-side auth state.
           </CaseStudyCard>
 
           <CaseStudyCard title="Menu management">
-            Implemented menu models and controllers, staff/admin management screens,
-            public menu pages, detailed item pages, validation, availability controls,
-            and editing flows.
+            Implemented menu models and controllers, staff/admin management
+            screens, public menu pages, detailed item pages, validation,
+            availability controls, and editing flows.
           </CaseStudyCard>
 
           <CaseStudyCard title="Media storage">
-            Added Cloudflare R2 uploads, multiple images per item, safe deletion behavior,
-            and reconciliation logic for detecting unreferenced objects.
+            Added Cloudflare R2 uploads, multiple images per item, safe deletion
+            behavior, and reconciliation logic for detecting unreferenced
+            objects.
           </CaseStudyCard>
 
           <CaseStudyCard title="UX and performance">
-            Reworked responsive components, fixed animation flicker and overflow issues,
-            improved hero performance, refined navigation, and tuned menu-card behavior.
+            Reworked responsive components, fixed animation flicker and overflow
+            issues, improved hero performance, refined navigation, and tuned
+            menu-card behavior.
           </CaseStudyCard>
 
           <CaseStudyCard title="Delivery tooling">
-            Added Docker containerization, Vercel configuration, GitHub Actions, linting,
-            formatting checks, build verification, and runtime updates.
+            Added Docker containerization, Vercel configuration, GitHub Actions,
+            linting, formatting checks, build verification, and runtime updates.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -176,14 +181,20 @@ export default function KochiGuruPizzaCaseStudyPage() {
         />
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <CaseStudyCard eyebrow="Sessions" title="Multiple devices without unlimited growth">
-            The user model can hold several refresh tokens, while a configurable session
-            limit prevents the stored list from growing without control.
+          <CaseStudyCard
+            eyebrow="Sessions"
+            title="Multiple devices without unlimited growth"
+          >
+            The user model can hold several refresh tokens, while a configurable
+            session limit prevents the stored list from growing without control.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Reliability" title="A network error is not a logout">
-            Retry behavior and client-side error handling avoid clearing a valid session
-            just because one request temporarily fails.
+          <CaseStudyCard
+            eyebrow="Reliability"
+            title="A network error is not a logout"
+          >
+            Retry behavior and client-side error handling avoid clearing a valid
+            session just because one request temporarily fails.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -195,13 +206,14 @@ export default function KochiGuruPizzaCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <CaseStudyCard eyebrow="Variant pricing" title="Pizza and add-ons">
-            These items can store small, medium, and large price variants as structured
-            size/price pairs.
+            These items can store small, medium, and large price variants as
+            structured size/price pairs.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Flat pricing" title="Other categories">
-            Pasta, buns, sandwiches, snacks, juices, milkshakes, mojitos, and soft drinks
-            can use one flat price while sharing the same menu-item model.
+            Pasta, buns, sandwiches, snacks, juices, milkshakes, mojitos, and
+            soft drinks can use one flat price while sharing the same menu-item
+            model.
           </CaseStudyCard>
         </div>
 
@@ -210,10 +222,11 @@ export default function KochiGuruPizzaCaseStudyPage() {
             Preventing stale state
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-            When an item changes category, the update path clears incompatible pricing
-            fields so a product does not accidentally keep an old flat price and a new
-            variant structure at the same time. Public list APIs can also filter by
-            category and availability with deterministic sorting.
+            When an item changes category, the update path clears incompatible
+            pricing fields so a product does not accidentally keep an old flat
+            price and a new variant structure at the same time. Public list APIs
+            can also filter by category and availability with deterministic
+            sorting.
           </p>
         </div>
       </CaseStudySection>
@@ -255,18 +268,18 @@ export default function KochiGuruPizzaCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           <CaseStudyCard title="Controlled object paths">
-            Generated names keep menu uploads inside a known prefix and preserve supported
-            image extensions.
+            Generated names keep menu uploads inside a known prefix and preserve
+            supported image extensions.
           </CaseStudyCard>
 
           <CaseStudyCard title="Deletion guardrails">
-            The service validates both the expected public domain and object prefix before
-            it allows a deletion request to reach R2.
+            The service validates both the expected public domain and object
+            prefix before it allows a deletion request to reach R2.
           </CaseStudyCard>
 
           <CaseStudyCard title="Dry-run cleanup">
-            Storage reconciliation can report orphaned objects before deleting them,
-            making cleanup observable instead of destructive by default.
+            Storage reconciliation can report orphaned objects before deleting
+            them, making cleanup observable instead of destructive by default.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -278,24 +291,26 @@ export default function KochiGuruPizzaCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Animation without flicker">
-            Several UI passes focused on animation flicker, conflicting utility classes,
-            responsive overflow, and hero performance so motion stayed subtle instead of
-            becoming visual noise.
+            Several UI passes focused on animation flicker, conflicting utility
+            classes, responsive overflow, and hero performance so motion stayed
+            subtle instead of becoming visual noise.
           </CaseStudyCard>
 
           <CaseStudyCard title="Responsive menu behavior">
-            Menu cards, detail pages, image galleries, header behavior, and mobile
-            navigation were refined as the real content became more complex.
+            Menu cards, detail pages, image galleries, header behavior, and
+            mobile navigation were refined as the real content became more
+            complex.
           </CaseStudyCard>
 
           <CaseStudyCard title="CI before deployment">
-            Frontend and backend jobs run formatting, linting, and production builds so a
-            change has to pass basic quality checks before it is considered ready.
+            Frontend and backend jobs run formatting, linting, and production
+            builds so a change has to pass basic quality checks before it is
+            considered ready.
           </CaseStudyCard>
 
           <CaseStudyCard title="Containerized local environment">
-            Docker Compose connects the frontend and backend in a predictable local setup,
-            including an internal API URL between containers.
+            Docker Compose connects the frontend and backend in a predictable
+            local setup, including an internal API URL between containers.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -307,24 +322,26 @@ export default function KochiGuruPizzaCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Authentication is a distributed UI problem">
-            Token expiry, network errors, OAuth callbacks, and local state all have to
-            cooperate before sign-in feels reliable to the user.
+            Token expiry, network errors, OAuth callbacks, and local state all
+            have to cooperate before sign-in feels reliable to the user.
           </CaseStudyCard>
 
           <CaseStudyCard title="Media needs lifecycle rules">
-            Uploading is easy; keeping object storage clean and preventing unsafe deletion
-            is where the system starts to feel production-minded.
+            Uploading is easy; keeping object storage clean and preventing
+            unsafe deletion is where the system starts to feel
+            production-minded.
           </CaseStudyCard>
 
           <CaseStudyCard title="Subtle polish compounds">
-            Small fixes to press feedback, transitions, responsive behavior, loading
-            perception, and navigation add up to a product that feels deliberate rather
-            than assembled.
+            Small fixes to press feedback, transitions, responsive behavior,
+            loading perception, and navigation add up to a product that feels
+            deliberate rather than assembled.
           </CaseStudyCard>
 
           <CaseStudyCard title="Operational code deserves the same design attention">
-            CI, container configuration, indexes, environment behavior, and deployment
-            files are part of the product even though customers never see them directly.
+            CI, container configuration, indexes, environment behavior, and
+            deployment files are part of the product even though customers never
+            see them directly.
           </CaseStudyCard>
         </div>
       </CaseStudySection>

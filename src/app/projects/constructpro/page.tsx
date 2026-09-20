@@ -50,22 +50,25 @@ export default function ConstructProCaseStudyPage() {
         description="The main challenge is keeping one business process consistent while several modules and services evolve independently."
       >
         <div className="grid gap-6 md:grid-cols-3">
-          <CaseStudyCard eyebrow="Business" title="Lead to construction project">
-            Leads move through quotation approval before becoming active construction
-            work. That relationship then feeds project operations, finance, documents,
-            and analytics.
+          <CaseStudyCard
+            eyebrow="Business"
+            title="Lead to construction project"
+          >
+            Leads move through quotation approval before becoming active
+            construction work. That relationship then feeds project operations,
+            finance, documents, and analytics.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Architecture" title="Domain-oriented backend">
-            The browser-facing API stays behind a gateway while NestJS services and
-            shared libraries separate business responsibilities, contracts, auth, and
-            database access.
+            The browser-facing API stays behind a gateway while NestJS services
+            and shared libraries separate business responsibilities, contracts,
+            auth, and database access.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Delivery" title="Five-repository setup">
-            Frontend, backend, infrastructure, documentation, and testing are separated
-            into the repository structure required for the university project, with work
-            tracked through issues and pull requests.
+            Frontend, backend, infrastructure, documentation, and testing are
+            separated into the repository structure required for the university
+            project, with work tracked through issues and pull requests.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -107,15 +110,17 @@ export default function ConstructProCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Why the gateway matters">
-            Internal service endpoints can stay private while the frontend works with one
-            public API surface. The gateway also gives the system a consistent place to
-            forward authenticated actor context and normalize downstream failures.
+            Internal service endpoints can stay private while the frontend works
+            with one public API surface. The gateway also gives the system a
+            consistent place to forward authenticated actor context and
+            normalize downstream failures.
           </CaseStudyCard>
 
           <CaseStudyCard title="Why shared contracts matter">
-            Cross-service workflows rely on typed payloads rather than duplicated object
-            shapes. That becomes especially important when quotation approval has to call
-            into the project domain and preserve domain-specific errors.
+            Cross-service workflows rely on typed payloads rather than
+            duplicated object shapes. That becomes especially important when
+            quotation approval has to call into the project domain and preserve
+            domain-specific errors.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -128,34 +133,40 @@ export default function ConstructProCaseStudyPage() {
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           <CaseStudyCard eyebrow="Domain" title="Project service foundation">
             Implemented project creation, retrieval, filtering, updates, manager
-            assignment, status behavior, validation, and the service boundary used by
-            quotation conversion.
+            assignment, status behavior, validation, and the service boundary
+            used by quotation conversion.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Workflow" title="Quotation → Project conversion">
-            Built the workflow for creating a project from an approved quotation or
-            attaching another quotation to an existing project, including recovery and
-            retry behavior.
+          <CaseStudyCard
+            eyebrow="Workflow"
+            title="Quotation → Project conversion"
+          >
+            Built the workflow for creating a project from an approved quotation
+            or attaching another quotation to an existing project, including
+            recovery and retry behavior.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Data" title="Migration reconciliation">
-            Reconciled drift between repository schemas, Prisma migration history, and the
-            deployed Neon database before continuing project-domain development.
+            Reconciled drift between repository schemas, Prisma migration
+            history, and the deployed Neon database before continuing
+            project-domain development.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Auth" title="Session and refresh-token flow">
-            Contributed to backend refresh-token support and frontend session hydration,
-            API interception, token refresh, and authenticated navigation behavior.
+            Contributed to backend refresh-token support and frontend session
+            hydration, API interception, token refresh, and authenticated
+            navigation behavior.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Delivery" title="Vercel and CI integration">
-            Worked on service entrypoints, build behavior, formatting/lint checks, E2E
-            environment setup, and deployment-oriented configuration.
+            Worked on service entrypoints, build behavior, formatting/lint
+            checks, E2E environment setup, and deployment-oriented
+            configuration.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Engineering" title="Tests and documentation">
-            Added unit/integration coverage and documented project activation, schema
-            changes, service contracts, and architecture decisions.
+            Added unit/integration coverage and documented project activation,
+            schema changes, service contracts, and architecture decisions.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -197,14 +208,14 @@ export default function ConstructProCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <CaseStudyCard eyebrow="Path A" title="Create a new project">
-            An approved quotation can create a new construction project using the project
-            details required by the domain. The project then becomes the operational home
-            for the approved work.
+            An approved quotation can create a new construction project using
+            the project details required by the domain. The project then becomes
+            the operational home for the approved work.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Path B" title="Attach to an existing project">
-            A second quotation for another scope can target an existing project rather
-            than creating a duplicate construction job.
+            A second quotation for another scope can target an existing project
+            rather than creating a duplicate construction job.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -231,18 +242,20 @@ export default function ConstructProCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           <CaseStudyCard title="Migration safety">
-            The change was validated against an isolated Neon branch before it reached the
-            shared development database, preserving existing links.
+            The change was validated against an isolated Neon branch before it
+            reached the shared development database, preserving existing links.
           </CaseStudyCard>
 
           <CaseStudyCard title="Dependent code">
-            Project lookups, deletion protection, invoice customer validation, contracts,
-            and tests all had to move from a singular relation to a plural one.
+            Project lookups, deletion protection, invoice customer validation,
+            contracts, and tests all had to move from a singular relation to a
+            plural one.
           </CaseStudyCard>
 
           <CaseStudyCard title="Business fit">
-            Design, 3D visualization, and construction quotations can now belong to the
-            same real-world project instead of forcing artificial duplicates.
+            Design, 3D visualization, and construction quotations can now belong
+            to the same real-world project instead of forcing artificial
+            duplicates.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -254,19 +267,22 @@ export default function ConstructProCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-3">
           <CaseStudyCard eyebrow="Risk" title="Duplicate project creation">
-            Two conversion attempts for the same quotation must never create two separate
-            project records.
+            Two conversion attempts for the same quotation must never create two
+            separate project records.
           </CaseStudyCard>
 
-          <CaseStudyCard eyebrow="Protection" title="Serializable transaction boundary">
-            The conversion path uses transaction isolation, row locking, and controlled
-            retry handling around the critical relationship update.
+          <CaseStudyCard
+            eyebrow="Protection"
+            title="Serializable transaction boundary"
+          >
+            The conversion path uses transaction isolation, row locking, and
+            controlled retry handling around the critical relationship update.
           </CaseStudyCard>
 
           <CaseStudyCard eyebrow="Recovery" title="Reuse valid partial state">
-            If a previous attempt already linked the quotation to a project, a retry can
-            recover that project instead of treating the valid partial state as a reason to
-            duplicate data.
+            If a previous attempt already linked the quotation to a project, a
+            retry can recover that project instead of treating the valid partial
+            state as a reason to duplicate data.
           </CaseStudyCard>
         </div>
 
@@ -276,9 +292,9 @@ export default function ConstructProCaseStudyPage() {
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
             Retry handling covers Prisma transaction conflicts such as P2034 and
-            PostgreSQL serialization failures surfaced through the Prisma/Neon stack. If
-            retries are exhausted, the service returns a controlled domain conflict rather
-            than silently producing inconsistent state.
+            PostgreSQL serialization failures surfaced through the Prisma/Neon
+            stack. If retries are exhausted, the service returns a controlled
+            domain conflict rather than silently producing inconsistent state.
           </p>
         </div>
       </CaseStudySection>
@@ -308,14 +324,15 @@ export default function ConstructProCaseStudyPage() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Real service boundary">
-            The conversion path was exercised through quotation service → HTTP client →
-            project service → test database instead of stopping at a mocked client.
+            The conversion path was exercised through quotation service → HTTP
+            client → project service → test database instead of stopping at a
+            mocked client.
           </CaseStudyCard>
 
           <CaseStudyCard title="Deployment discipline">
-            CI, migration checks, branch-based database validation, pull-request review,
-            build verification, and release documentation are treated as part of delivery,
-            not as work added after the feature is complete.
+            CI, migration checks, branch-based database validation, pull-request
+            review, build verification, and release documentation are treated as
+            part of delivery, not as work added after the feature is complete.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
@@ -327,23 +344,24 @@ export default function ConstructProCaseStudyPage() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <CaseStudyCard title="Happy-path correctness is not enough">
-            Distributed workflows need explicit idempotency and recovery rules because
-            valid partial state can exist after a failure.
+            Distributed workflows need explicit idempotency and recovery rules
+            because valid partial state can exist after a failure.
           </CaseStudyCard>
 
           <CaseStudyCard title="The schema is part of the product">
-            A small client clarification can change cardinality, migrations, validation,
-            contracts, and tests across several services.
+            A small client clarification can change cardinality, migrations,
+            validation, contracts, and tests across several services.
           </CaseStudyCard>
 
           <CaseStudyCard title="Deployment constraints influence design">
-            A service that works locally can still need different bootstrap and entrypoint
-            behavior when deployed into a serverless environment.
+            A service that works locally can still need different bootstrap and
+            entrypoint behavior when deployed into a serverless environment.
           </CaseStudyCard>
 
           <CaseStudyCard title="Documentation prevents implementation drift">
-            Architecture records and migration notes made later changes safer because the
-            team could trace why the existing behavior was designed that way.
+            Architecture records and migration notes made later changes safer
+            because the team could trace why the existing behavior was designed
+            that way.
           </CaseStudyCard>
         </div>
       </CaseStudySection>
