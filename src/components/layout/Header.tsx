@@ -1,12 +1,14 @@
 // src/components/layout/Header.tsx
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ButtonAnchor } from "@/components/ui/ButtonAnchor";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { profile } from "@/data/portfolio";
 import {
   consumePendingSection,
+  isHomePage,
   scrollToSection,
   SECTION_SCROLL_EVENT,
 } from "@/utils/scrollToSection";
@@ -43,6 +45,8 @@ const navLinks = [
 ];
 
 export function Header() {
+  const router = useRouter();
+  const pathname = usePathname();
   const resumeHref = profile.resumeUrl;
 
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -50,9 +54,12 @@ export function Header() {
   const programmaticScrollRef = useRef(false);
   const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const handleNavigate = (sectionId: string) => {
+    scrollToSection(sectionId, router);
+  };
+
   useEffect(() => {
     let animationFrameId: number | null = null;
-    let pendingFrameId: number | null = null;
 
     const updateActiveSection = () => {
       animationFrameId = null;
@@ -176,15 +183,6 @@ export function Header() {
 
     updateActiveSection();
 
-    // Continue section navigation after returning from another page.
-    const pendingSection = consumePendingSection();
-
-    if (pendingSection) {
-      pendingFrameId = window.requestAnimationFrame(() => {
-        scrollToSection(pendingSection);
-      });
-    }
-
     return () => {
       window.removeEventListener(SECTION_SCROLL_EVENT, handleSectionNavigation);
 
@@ -196,22 +194,45 @@ export function Header() {
         window.cancelAnimationFrame(animationFrameId);
       }
 
-      if (pendingFrameId !== null) {
-        window.cancelAnimationFrame(pendingFrameId);
-      }
-
       if (scrollEndTimerRef.current !== null) {
         clearTimeout(scrollEndTimerRef.current);
       }
     };
   }, []);
 
+  // Handle section scrolling after client-side route transitions to homepage.
+  useEffect(() => {
+    if (!isHomePage()) {
+      return;
+    }
+
+    const pendingSection = consumePendingSection();
+
+    if (!pendingSection) {
+      return;
+    }
+
+    let innerFrameId: number | null = null;
+    const outerFrameId = window.requestAnimationFrame(() => {
+      innerFrameId = window.requestAnimationFrame(() => {
+        scrollToSection(pendingSection);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(outerFrameId);
+      if (innerFrameId !== null) {
+        window.cancelAnimationFrame(innerFrameId);
+      }
+    };
+  }, [pathname]);
+
   return (
     <header className="sticky top-0 z-50 border-b border-border/75 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-6">
         <button
           type="button"
-          onClick={() => scrollToSection("top")}
+          onClick={() => handleNavigate("top")}
           className="font-heading text-lg font-semibold text-foreground"
         >
           {profile.initials}
@@ -226,7 +247,7 @@ export function Header() {
                 key={link.id}
                 type="button"
                 aria-current={isActive ? "location" : undefined}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleNavigate(link.id)}
                 className={`group py-2 text-sm transition-colors duration-200 ${
                   isActive
                     ? "text-primary"
@@ -260,7 +281,7 @@ export function Header() {
           links={navLinks}
           resumeHref={resumeHref}
           activeSection={activeSection}
-          onNavigate={scrollToSection}
+          onNavigate={handleNavigate}
         />
       </div>
     </header>

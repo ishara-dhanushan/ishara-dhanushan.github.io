@@ -5,7 +5,7 @@
 // It loads Medium articles in the visitor's browser after hydration, on
 // every page load, so new posts show up without a GitHub Actions redeploy.
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MediumPostCard } from "@/components/articles/MediumPostCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { profile } from "@/data/portfolio";
@@ -23,48 +23,66 @@ function ArticleSkeleton() {
 export function MediumPostsFeed() {
   const [posts, setPosts] = useState<MediumPost[]>([]);
   const [status, setStatus] = useState<FeedStatus>("loading");
+  const hasFetchedRef = useRef(false);
 
-  useEffect(() => {
-    let cancelled = false;
+  const cachedPosts = useMemo(() => getCachedMediumPosts(), []);
 
-    // Load from cache immediately on mount after hydration
-    const cached = getCachedMediumPosts();
-    if (cached && cached.length > 0) {
-      queueMicrotask(() => {
-        if (!cancelled) {
-          setPosts(cached);
-          setStatus("success");
-        }
-      });
+  const loadPosts = useCallback(async () => {
+    if (hasFetchedRef.current) return;
+    hasFetchedRef.current = true;
+
+    if (cachedPosts && cachedPosts.length > 0) {
+      setPosts(cachedPosts);
+      setStatus("success");
     }
 
-    fetchMediumPosts().then((result) => {
-      if (cancelled) return;
-
-      if (result.posts.length === 0) {
-        if (!cached || cached.length === 0) {
-          setStatus(result.error ? "error" : "empty");
-        }
-        return;
+    try {
+      const result = await fetchMediumPosts();
+      if (result.posts.length > 0) {
+        setPosts(result.posts);
+        setStatus("success");
+      } else if (!cachedPosts || cachedPosts.length === 0) {
+        setStatus(result.error ? "error" : "empty");
       }
+    } catch {
+      if (!cachedPosts || cachedPosts.length === 0) {
+        setStatus("error");
+      }
+    }
+  }, [cachedPosts]);
 
-      setPosts(result.posts);
-      setStatus("success");
-    });
+  useEffect(() => {
+    loadPosts();
+  }, [loadPosts]);
 
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  if (status === "loading") {
-    return (
+  const skeletons = useMemo(
+    () => (
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <ArticleSkeleton />
         <ArticleSkeleton />
         <ArticleSkeleton />
       </div>
-    );
+    ),
+    []
+  );
+
+  const renderedPosts = useMemo(
+    () =>
+      posts.map((post, index) => (
+        <ScrollReveal
+          key={post.id}
+          className="h-full"
+          delay={(index % 3) * 0.05}
+          distance={34}
+        >
+          <MediumPostCard post={post} />
+        </ScrollReveal>
+      )),
+    [posts]
+  );
+
+  if (status === "loading") {
+    return skeletons;
   }
 
   if (status === "error") {
@@ -103,16 +121,7 @@ export function MediumPostsFeed() {
 
   return (
     <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post, index) => (
-        <ScrollReveal
-          key={post.id}
-          className="h-full"
-          delay={(index % 3) * 0.05}
-          distance={34}
-        >
-          <MediumPostCard post={post} />
-        </ScrollReveal>
-      ))}
+      {renderedPosts}
     </div>
   );
 }

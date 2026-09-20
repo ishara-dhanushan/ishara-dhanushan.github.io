@@ -40,7 +40,10 @@ export function scrollToTop() {
   });
 }
 
-export function scrollToSection(sectionId: string) {
+export function scrollToSection(
+  sectionId: string,
+  router?: { push: (url: string) => void }
+) {
   if (typeof window === "undefined") {
     return;
   }
@@ -50,7 +53,11 @@ export function scrollToSection(sectionId: string) {
       sessionStorage.setItem(PENDING_SECTION_KEY, sectionId);
     } catch {}
 
-    window.location.assign(homeHref);
+    if (router) {
+      router.push("/");
+    } else {
+      window.location.assign(homeHref);
+    }
     return;
   }
 
