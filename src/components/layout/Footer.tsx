@@ -1,5 +1,7 @@
 // src/components/layout/Footer.tsx
+"use client";
 import { profile } from "@/data/portfolio";
+import { scrollToSection } from "@/utils/scrollToSection";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -10,12 +12,13 @@ export function Footer() {
         <p>
           © {year} {profile.name}. Built with Next.js and Tailwind CSS.
         </p>
-        <a
-          href="#top"
+        <button
+          type="button"
+          onClick={() => scrollToSection("top")}
           className="text-foreground transition-colors hover:text-primary"
         >
           Back to top
-        </a>
+        </button>
       </div>
     </footer>
   );

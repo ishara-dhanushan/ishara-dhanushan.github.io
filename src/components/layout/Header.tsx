@@ -3,44 +3,41 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ButtonAnchor } from "@/components/ui/ButtonAnchor";
+import { MobileMenu } from "@/components/layout/MobileMenu";
 import { profile } from "@/data/portfolio";
-import { assetPrefix } from "@/utils/assetPrefix";
-import { MobileMenu } from "./MobileMenu";
+import {
+  consumePendingSection,
+  scrollToSection,
+  SECTION_SCROLL_EVENT,
+} from "@/utils/scrollToSection";
 
 const navLinks = [
   {
     id: "about",
-    href: `${assetPrefix}/#about`,
     label: "About",
   },
   {
     id: "education",
-    href: `${assetPrefix}/#education`,
     label: "Education",
   },
   {
     id: "experience",
-    href: `${assetPrefix}/#experience`,
     label: "Experience",
   },
   {
     id: "projects",
-    href: `${assetPrefix}/#projects`,
     label: "Projects",
   },
   {
     id: "tech-stack",
-    href: `${assetPrefix}/#tech-stack`,
     label: "Tech Stack",
   },
   {
     id: "articles",
-    href: `${assetPrefix}/#articles`,
     label: "Articles",
   },
   {
     id: "contact",
-    href: `${assetPrefix}/#contact`,
     label: "Contact",
   },
 ];
@@ -50,21 +47,16 @@ export function Header() {
 
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  // Pauses scroll-spy during programmatic smooth scrolling so intermediate sections don't flash.
   const programmaticScrollRef = useRef(false);
-
-  // Smooth scrolling emits many scroll events. We use a short debounce
-  // to detect when those events have actually stopped.
   const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     let animationFrameId: number | null = null;
+    let pendingFrameId: number | null = null;
 
     const updateActiveSection = () => {
       animationFrameId = null;
 
-      // When right at the top of the page, no navbar section should be
-      // highlighted because the user is viewing the hero rather than About.
       if (window.scrollY < 80) {
         setActiveSection(null);
         return;
@@ -89,8 +81,7 @@ export function Header() {
         return;
       }
 
-      // A point around one-third down the viewport generally represents what
-      // the user is actively reading better than the very top edge.
+      // Use a point inside the viewport to represent the section being read.
       const activationPoint = window.scrollY + window.innerHeight * 0.35;
 
       let currentSection: string | null = null;
@@ -106,8 +97,6 @@ export function Header() {
         }
       }
 
-      // Contact can be shorter than the viewport, so explicitly mark it
-      // as active when the bottom of the page has been reached.
       const reachedPageBottom =
         window.scrollY + window.innerHeight >=
         document.documentElement.scrollHeight - 4;
@@ -133,14 +122,10 @@ export function Header() {
         clearTimeout(scrollEndTimerRef.current);
       }
 
-      // Every scroll event resets this timer. It therefore runs only after
-      // smooth scrolling has actually stopped.
       scrollEndTimerRef.current = setTimeout(finishProgrammaticScroll, 140);
     };
 
     const handleScroll = () => {
-      // Keep the clicked destination highlighted while smooth scrolling
-      // passes through intermediate sections.
       if (programmaticScrollRef.current) {
         scheduleScrollEnd();
         return;
@@ -153,64 +138,27 @@ export function Header() {
       animationFrameId = window.requestAnimationFrame(updateActiveSection);
     };
 
-    const handleInternalNavigation = (event: MouseEvent) => {
-      const clickedElement = event.target;
+    const handleSectionNavigation = (event: Event) => {
+      const sectionEvent = event as CustomEvent<{
+        sectionId: string;
+      }>;
 
-      if (!(clickedElement instanceof Element)) {
+      const sectionId = sectionEvent.detail?.sectionId;
+
+      if (!sectionId) {
         return;
       }
 
-      // The actual click may occur on a span/icon inside the anchor, so locate
-      // the closest anchor rather than requiring event.target to be <a>.
-      const anchor = clickedElement.closest("a[href]");
-
-      if (!(anchor instanceof HTMLAnchorElement)) {
-        return;
-      }
-
-      // Only handle same-page navigation to avoid external URLs altering navbar state.
-      const destination = new URL(anchor.href, window.location.href);
-
-      const currentLocation = new URL(window.location.href);
-
-      const isSamePage =
-        destination.origin === currentLocation.origin &&
-        destination.pathname === currentLocation.pathname &&
-        destination.search === currentLocation.search;
-
-      if (!isSamePage) {
-        return;
-      }
-
-      const targetId = destination.hash.replace("#", "");
-
-      if (!targetId) {
-        return;
-      }
-
-      const isTopLink = targetId === "top";
-
-      const isNavigationSection = navLinks.some((link) => link.id === targetId);
-
-      // Ignore hashes that are unrelated to the portfolio navigation.
-      if (!isTopLink && !isNavigationSection) {
-        return;
-      }
-
-      // Pause scroll-spy before the browser begins smooth scrolling.
       programmaticScrollRef.current = true;
 
-      if (isTopLink) {
-        // The hero/top area has no navbar title, so clear the active state.
-        setActiveSection(null);
-      } else {
-        // Highlight the destination immediately. It will remain highlighted
-        // while the page smoothly scrolls toward it.
-        setActiveSection(targetId);
-      }
+      const isNavigationSection = navLinks.some(
+        (link) => link.id === sectionId
+      );
 
-      // Handles cases where almost no scrolling occurs because the target
-      // is already very close to the current position.
+      setActiveSection(
+        sectionId === "top" ? null : isNavigationSection ? sectionId : null
+      );
+
       if (scrollEndTimerRef.current !== null) {
         clearTimeout(scrollEndTimerRef.current);
       }
@@ -218,11 +166,7 @@ export function Header() {
       scrollEndTimerRef.current = setTimeout(finishProgrammaticScroll, 300);
     };
 
-    updateActiveSection();
-
-    // Capture-phase listening means every same-page hash link is detected,
-    // even when the clicked component also has its own click handler.
-    document.addEventListener("click", handleInternalNavigation, true);
+    window.addEventListener(SECTION_SCROLL_EVENT, handleSectionNavigation);
 
     window.addEventListener("scroll", handleScroll, {
       passive: true,
@@ -230,8 +174,19 @@ export function Header() {
 
     window.addEventListener("resize", handleScroll);
 
+    updateActiveSection();
+
+    // Continue section navigation after returning from another page.
+    const pendingSection = consumePendingSection();
+
+    if (pendingSection) {
+      pendingFrameId = window.requestAnimationFrame(() => {
+        scrollToSection(pendingSection);
+      });
+    }
+
     return () => {
-      document.removeEventListener("click", handleInternalNavigation, true);
+      window.removeEventListener(SECTION_SCROLL_EVENT, handleSectionNavigation);
 
       window.removeEventListener("scroll", handleScroll);
 
@@ -239,6 +194,10 @@ export function Header() {
 
       if (animationFrameId !== null) {
         window.cancelAnimationFrame(animationFrameId);
+      }
+
+      if (pendingFrameId !== null) {
+        window.cancelAnimationFrame(pendingFrameId);
       }
 
       if (scrollEndTimerRef.current !== null) {
@@ -250,22 +209,24 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/75 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-6">
-        <a
-          href={`${assetPrefix}/#top`}
+        <button
+          type="button"
+          onClick={() => scrollToSection("top")}
           className="font-heading text-lg font-semibold text-foreground"
         >
           {profile.initials}
-        </a>
+        </button>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
 
             return (
-              <a
+              <button
                 key={link.id}
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
+                type="button"
+                aria-current={isActive ? "location" : undefined}
+                onClick={() => scrollToSection(link.id)}
                 className={`group py-2 text-sm transition-colors duration-200 ${
                   isActive
                     ? "text-primary"
@@ -284,7 +245,7 @@ export function Header() {
                     }`}
                   />
                 </span>
-              </a>
+              </button>
             );
           })}
         </nav>
@@ -299,6 +260,7 @@ export function Header() {
           links={navLinks}
           resumeHref={resumeHref}
           activeSection={activeSection}
+          onNavigate={scrollToSection}
         />
       </div>
     </header>

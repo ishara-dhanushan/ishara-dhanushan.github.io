@@ -4,25 +4,25 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { ButtonAnchor } from "@/components/ui/ButtonAnchor";
 
 interface MobileMenuProps {
   links: {
     id: string;
-    href: string;
     label: string;
   }[];
-
   resumeHref: string;
   activeSection: string | null;
+  onNavigate: (sectionId: string) => void;
 }
 
 export function MobileMenu({
   links,
   resumeHref,
   activeSection,
+  onNavigate,
 }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
-
   const reduceMotion = useReducedMotion();
 
   return (
@@ -83,30 +83,30 @@ export function MobileMenu({
                 const isActive = activeSection === link.id;
 
                 return (
-                  <a
+                  <button
                     key={link.id}
-                    href={link.href}
+                    type="button"
                     aria-current={isActive ? "page" : undefined}
-                    onClick={() => setOpen(false)}
-                    className={`text-base transition-colors duration-200 ${
+                    onClick={() => {
+                      onNavigate(link.id);
+                      setOpen(false);
+                    }}
+                    className={`text-left text-base transition-colors duration-200 ${
                       isActive
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </button>
                 );
               })}
 
-              <a
-                href={resumeHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground"
-              >
-                Download CV
-              </a>
+              <div className="mt-2">
+                <ButtonAnchor href={resumeHref} external>
+                  Download CV
+                </ButtonAnchor>
+              </div>
             </nav>
           </motion.div>
         )}

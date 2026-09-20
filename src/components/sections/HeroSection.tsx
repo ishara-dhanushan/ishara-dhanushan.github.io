@@ -1,9 +1,11 @@
 // src/components/sections/HeroSection.tsx
+"use client";
+
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { TypewriterText } from "@/components/motion/TypewriterText";
-import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ButtonAnchor } from "@/components/ui/ButtonAnchor";
 import { profile } from "@/data/portfolio";
+import { homeHref, scrollToSection } from "@/utils/scrollToSection";
 
 export function HeroSection() {
   const resumeHref = profile.resumeUrl;
@@ -46,7 +48,15 @@ export function HeroSection() {
 
         <ScrollReveal delay={0.2} distance={30}>
           <div className="mt-8 flex flex-wrap gap-4">
-            <ButtonLink href="#projects">View Projects</ButtonLink>
+            <ButtonAnchor
+              href={homeHref}
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToSection("projects");
+              }}
+            >
+              View Projects
+            </ButtonAnchor>
 
             <ButtonAnchor href={resumeHref} variant="secondary" external>
               Download CV

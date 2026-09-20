@@ -1,14 +1,16 @@
 // src/components/ui/ButtonLink.tsx
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
 interface ButtonLinkProps {
   href: string;
   children: ReactNode;
   variant?: "primary" | "secondary";
   external?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function ButtonLink({
@@ -16,6 +18,7 @@ export function ButtonLink({
   children,
   variant = "primary",
   external,
+  onClick,
 }: ButtonLinkProps) {
   const reduceMotion = useReducedMotion();
 
@@ -28,9 +31,8 @@ export function ButtonLink({
       : "border border-border text-foreground hover:bg-surface-hover";
 
   return (
-    <motion.a
-      href={href}
-      className={`${base} ${styles}`}
+    <motion.span
+      className="inline-flex"
       whileHover={
         reduceMotion
           ? undefined
@@ -52,14 +54,20 @@ export function ButtonLink({
         damping: 30,
         mass: 0.55,
       }}
-      {...(external
-        ? {
-            target: "_blank",
-            rel: "noopener noreferrer",
-          }
-        : {})}
     >
-      {children}
-    </motion.a>
+      <Link
+        href={href}
+        onClick={onClick}
+        className={`${base} ${styles}`}
+        {...(external
+          ? {
+              target: "_blank",
+              rel: "noopener noreferrer",
+            }
+          : {})}
+      >
+        {children}
+      </Link>
+    </motion.span>
   );
 }
