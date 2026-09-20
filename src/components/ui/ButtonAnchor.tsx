@@ -2,13 +2,14 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
 interface ButtonAnchorProps {
   href: string;
   children: ReactNode;
   variant?: "primary" | "secondary";
   external?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function ButtonAnchor({
@@ -16,6 +17,7 @@ export function ButtonAnchor({
   children,
   variant = "primary",
   external,
+  onClick,
 }: ButtonAnchorProps) {
   const reduceMotion = useReducedMotion();
 
@@ -30,6 +32,7 @@ export function ButtonAnchor({
   return (
     <motion.a
       href={href}
+      onClick={onClick}
       className={`${base} ${styles}`}
       whileHover={
         reduceMotion
