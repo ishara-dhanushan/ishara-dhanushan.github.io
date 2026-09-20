@@ -101,7 +101,7 @@ export const projects: Project[] = [
     category: "Web",
     ownership: "Client, ongoing",
     summary:
-      "Client ordering platform covering menu, cart, checkout, and admin workflows.",
+      "Client pizza-shop platform with authentication, menu management, media storage, and admin workflows.",
     stack: ["Next.js", "Express.js", "MongoDB", "JWT"],
     featured: true,
     hasCaseStudy: true,
@@ -121,7 +121,7 @@ export const projects: Project[] = [
     featured: true,
     hasCaseStudy: true,
     links: {
-      github: "https://github.com/ishara-dhanushan/FuelWiseLK",
+      github: "https://github.com/MininduBimsara/FuelWiseLK",
     },
   },
   {
@@ -191,7 +191,9 @@ export const projects: Project[] = [
     stack: ["Flutter", "Firebase", "Provider"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/Finance-Tracker-App",
+    },
   },
   {
     slug: "taskmaster",
@@ -236,6 +238,16 @@ export const projects: Project[] = [
     },
   },
 ];
+
+export function getProjectBySlug(slug: string): Project {
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    throw new Error(`Project not found: ${slug}`);
+  }
+
+  return project;
+}
 
 // The visually emphasized "Core Stack" row shown above the grouped tech cards.
 export const coreStack: string[] = [
