@@ -5,7 +5,7 @@
 // It loads Medium articles in the visitor's browser after hydration, on
 // every page load, so new posts show up without a GitHub Actions redeploy.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MediumPostCard } from "@/components/articles/MediumPostCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { profile } from "@/data/portfolio";
@@ -20,40 +20,58 @@ function ArticleSkeleton() {
   );
 }
 
+let memoryPosts: MediumPost[] | null = null;
+let memoryStatus: FeedStatus | null = null;
+
 export function MediumPostsFeed() {
-  const [posts, setPosts] = useState<MediumPost[]>([]);
-  const [status, setStatus] = useState<FeedStatus>("loading");
-  const hasFetchedRef = useRef(false);
-
-  const cachedPosts = useMemo(() => getCachedMediumPosts(), []);
-
-  const loadPosts = useCallback(async () => {
-    if (hasFetchedRef.current) return;
-    hasFetchedRef.current = true;
-
-    if (cachedPosts && cachedPosts.length > 0) {
-      setPosts(cachedPosts);
-      setStatus("success");
-    }
-
-    try {
-      const result = await fetchMediumPosts();
-      if (result.posts.length > 0) {
-        setPosts(result.posts);
-        setStatus("success");
-      } else if (!cachedPosts || cachedPosts.length === 0) {
-        setStatus(result.error ? "error" : "empty");
-      }
-    } catch {
-      if (!cachedPosts || cachedPosts.length === 0) {
-        setStatus("error");
-      }
-    }
-  }, [cachedPosts]);
+  const [posts, setPosts] = useState<MediumPost[]>(() => memoryPosts ?? []);
+  const [status, setStatus] = useState<FeedStatus>(
+    () =>
+      memoryStatus ??
+      (memoryPosts && memoryPosts.length > 0 ? "success" : "loading")
+  );
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
-    loadPosts();
-  }, [loadPosts]);
+    let cancelled = false;
+
+    const cached = getCachedMediumPosts();
+    if (!memoryPosts && cached && cached.length > 0) {
+      queueMicrotask(() => {
+        if (!cancelled) {
+          memoryPosts = cached;
+          memoryStatus = "success";
+          setPosts(cached);
+          setStatus("success");
+        }
+      });
+    }
+
+    async function load() {
+      const result = await fetchMediumPosts();
+      if (cancelled) return;
+
+      if (result.posts.length > 0) {
+        memoryPosts = result.posts;
+        memoryStatus = "success";
+        setPosts(result.posts);
+        setStatus("success");
+      } else if (!memoryPosts && (!cached || cached.length === 0)) {
+        const nextStatus = result.error ? "error" : "empty";
+        memoryStatus = nextStatus;
+        setStatus(nextStatus);
+      }
+    }
+
+    if (!fetchedRef.current && !memoryPosts) {
+      fetchedRef.current = true;
+      load();
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const skeletons = useMemo(
     () => (
