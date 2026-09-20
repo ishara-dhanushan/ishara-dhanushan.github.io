@@ -1,6 +1,8 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Poppins, Montserrat, JetBrains_Mono } from "next/font/google";
+import { AnimatedBackground } from "@/components/background/AnimatedBackground";
+import { ScrollDirectionProvider } from "@/components/motion/ScrollDirectionProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
@@ -41,10 +43,16 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Header />
-        {children}
-        <Footer />
+      <body className="min-h-full">
+        <AnimatedBackground />
+
+        <ScrollDirectionProvider>
+          <div className="relative z-10 flex min-h-full flex-col">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </ScrollDirectionProvider>
       </body>
     </html>
   );

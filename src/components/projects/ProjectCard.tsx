@@ -1,14 +1,36 @@
 // src/components/projects/ProjectCard.tsx
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { Tag } from "@/components/ui/Tag";
 import type { Project } from "@/types/portfolio";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <article className="flex flex-col rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-primary/60">
+    <motion.article
+      className="flex h-full flex-col rounded-2xl border border-border/75 bg-surface/50 p-6 transition-colors hover:border-primary/60"
+      whileHover={
+        reduceMotion
+          ? undefined
+          : {
+              scale: 1.015,
+              y: -3,
+            }
+      }
+      transition={{
+        type: "spring",
+        stiffness: 360,
+        damping: 28,
+        mass: 0.65,
+      }}
+    >
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-heading text-lg font-semibold text-foreground">
           {project.title}
         </h3>
+
         <span className="shrink-0 font-mono text-xs text-muted-foreground">
           {project.ownership}
         </span>
@@ -28,46 +50,55 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div className="mt-6 flex flex-wrap gap-4 text-sm">
         {project.hasCaseStudy && (
-          <a
+          <motion.a
             href={`projects/${project.slug}/`}
             className="font-medium text-primary hover:text-primary-hover"
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             View Case Study
-          </a>
+          </motion.a>
         )}
+
         {project.links.github && (
-          <a
+          <motion.a
             href={project.links.github}
             className="text-muted-foreground hover:text-foreground"
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             GitHub
-          </a>
+          </motion.a>
         )}
+
         {project.links.demo && (
-          <a
+          <motion.a
             href={project.links.demo}
             className="text-muted-foreground hover:text-foreground"
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             Live Demo
-          </a>
+          </motion.a>
         )}
+
         {project.links.video && (
-          <a
+          <motion.a
             href={project.links.video}
             className="text-muted-foreground hover:text-foreground"
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             Demo Video
-          </a>
+          </motion.a>
         )}
+
         {project.links.figma && (
-          <a
+          <motion.a
             href={project.links.figma}
             className="text-muted-foreground hover:text-foreground"
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             Figma Design
-          </a>
+          </motion.a>
         )}
       </div>
-    </article>
+    </motion.article>
   );
 }
