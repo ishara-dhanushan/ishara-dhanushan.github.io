@@ -1,6 +1,7 @@
 // src/components/projects/ProjectCard.tsx
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Tag } from "@/components/ui/Tag";
 import type { Project } from "@/types/portfolio";
@@ -50,15 +51,30 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div className="mt-auto flex flex-col gap-3 pt-6 text-sm">
         {project.hasCaseStudy && (
-          <div>
-            <motion.a
-              href={`projects/${project.slug}/`}
-              className="font-medium text-primary hover:text-primary-hover"
-              whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+          <motion.span
+            className="inline-flex self-start"
+            whileTap={
+              reduceMotion
+                ? undefined
+                : {
+                    scale: 0.95,
+                  }
+            }
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 30,
+              mass: 0.55,
+            }}
+          >
+            <Link
+              href={`/projects/${project.slug}`}
+              scroll={false}
+              className="font-medium text-primary transition-colors hover:text-primary-hover"
             >
               View Case Study
-            </motion.a>
-          </div>
+            </Link>
+          </motion.span>
         )}
 
         {(project.links.github ||
@@ -71,8 +87,14 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground"
-                whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+                whileTap={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        scale: 0.95,
+                      }
+                }
               >
                 GitHub
               </motion.a>
@@ -83,8 +105,14 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground"
-                whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+                whileTap={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        scale: 0.95,
+                      }
+                }
               >
                 Live Demo
               </motion.a>
@@ -95,8 +123,14 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={project.links.video}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground"
-                whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+                whileTap={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        scale: 0.95,
+                      }
+                }
               >
                 Demo Video
               </motion.a>
@@ -107,8 +141,14 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={project.links.figma}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground"
-                whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+                whileTap={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        scale: 0.95,
+                      }
+                }
               >
                 Figma Design
               </motion.a>

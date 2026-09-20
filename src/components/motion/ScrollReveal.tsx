@@ -21,9 +21,15 @@ export function ScrollReveal({
   amount = 0.25,
 }: ScrollRevealProps) {
   const elementRef = useRef<HTMLDivElement>(null);
+
   const visibleRef = useRef(false);
+
+  const hasReachedRevealThresholdRef = useRef(false);
+
   const controls = useAnimationControls();
+
   const reduceMotion = useReducedMotion();
+
   const scrollDirectionRef = useScrollDirectionRef();
 
   useEffect(() => {
@@ -35,17 +41,28 @@ export function ScrollReveal({
 
     if (reduceMotion) {
       visibleRef.current = true;
-      controls.set({ opacity: 1, y: 0 });
+
+      controls.set({
+        opacity: 1,
+        y: 0,
+      });
+
       return;
     }
 
     if (element.dataset.scrollRevealRestored === "true") {
       visibleRef.current = true;
+
       delete element.dataset.scrollRevealRestored;
-      controls.set({ opacity: 1, y: 0 });
+
+      controls.set({
+        opacity: 1,
+        y: 0,
+      });
     }
 
     const revealThreshold = Math.min(Math.max(amount, 0), 1);
+
     const hideThreshold = revealThreshold * 0.5;
 
     const observer = new IntersectionObserver(
@@ -56,20 +73,32 @@ export function ScrollReveal({
 
         if (element.dataset.scrollRevealRestored === "true") {
           visibleRef.current = true;
+
           delete element.dataset.scrollRevealRestored;
         }
 
         const direction = scrollDirectionRef.current;
+
         const visibleAmount = entry.intersectionRatio;
+
         const elementTop = entry.boundingClientRect.top;
 
-        // Reveal at 25% while scrolling down.
+        const firstVisibleIntersection =
+          !hasReachedRevealThresholdRef.current &&
+          visibleAmount >= revealThreshold;
+
+        if (visibleAmount >= revealThreshold) {
+          hasReachedRevealThresholdRef.current = true;
+        }
+
+        // Allow the first viewport intersection after client-side navigation.
         if (
-          direction === "down" &&
+          (direction === "down" || firstVisibleIntersection) &&
           visibleAmount >= revealThreshold &&
           !visibleRef.current
         ) {
           visibleRef.current = true;
+
           controls.stop();
 
           void controls.start({
@@ -85,7 +114,7 @@ export function ScrollReveal({
           return;
         }
 
-        // Recover once when hidden content enters from the top while scrolling up.
+        // Recover hidden content when re-entering from the top.
         if (
           direction === "up" &&
           entry.isIntersecting &&
@@ -93,12 +122,18 @@ export function ScrollReveal({
           !visibleRef.current
         ) {
           visibleRef.current = true;
+
           controls.stop();
-          controls.set({ opacity: 1, y: 0 });
+
+          controls.set({
+            opacity: 1,
+            y: 0,
+          });
+
           return;
         }
 
-        // Hide at 12.5% only while leaving through the bottom.
+        // Hide only while scrolling upward and leaving through the bottom.
         if (
           direction === "up" &&
           visibleAmount <= hideThreshold &&
@@ -106,6 +141,7 @@ export function ScrollReveal({
           visibleRef.current
         ) {
           visibleRef.current = false;
+
           controls.stop();
 
           void controls.start({
