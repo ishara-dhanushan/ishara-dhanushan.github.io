@@ -1,7 +1,7 @@
 // src/components/layout/Footer.tsx
 "use client";
 import { profile } from "@/data/portfolio";
-import { scrollToSection } from "@/utils/scrollToSection";
+import { scrollToTop } from "@/utils/scrollToSection";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -14,7 +14,7 @@ export function Footer() {
         </p>
         <button
           type="button"
-          onClick={() => scrollToSection("top")}
+          onClick={scrollToTop}
           className="text-foreground transition-colors hover:text-primary"
         >
           Back to top
