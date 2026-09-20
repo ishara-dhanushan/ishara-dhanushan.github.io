@@ -5,11 +5,11 @@ import { MobileMenu } from "./MobileMenu";
 import { assetPrefix } from "@/utils/assetPrefix";
 
 const navLinks = [
+  { href: `${assetPrefix}/#about`, label: "About" },
+  { href: `${assetPrefix}/#education`, label: "Education" },
   { href: `${assetPrefix}/#experience`, label: "Experience" },
   { href: `${assetPrefix}/#projects`, label: "Projects" },
   { href: `${assetPrefix}/#tech-stack`, label: "Tech Stack" },
-  { href: `${assetPrefix}/#about`, label: "About" },
-  { href: `${assetPrefix}/#education`, label: "Education" },
   { href: `${assetPrefix}/#articles`, label: "Articles" },
   { href: `${assetPrefix}/#contact`, label: "Contact" },
 ];
@@ -18,7 +18,7 @@ export function Header() {
   const resumeHref = profile.resumeUrl;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border/75 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-6">
         <a
           href={`${assetPrefix}/#top`}

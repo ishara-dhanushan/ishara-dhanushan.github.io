@@ -1,4 +1,6 @@
 // src/components/sections/CapabilitiesSection.tsx
+import { HoverCard } from "@/components/motion/HoverCard";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { capabilities } from "@/data/portfolio";
 
@@ -11,17 +13,22 @@ export function CapabilitiesSection() {
       />
 
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {capabilities.map((capability) => (
-          <div
+        {capabilities.map((capability, index) => (
+          <ScrollReveal
             key={capability}
-            className="flex gap-3 rounded-2xl border border-border bg-surface p-5 text-sm text-foreground"
+            className="h-full"
+            delay={(index % 2) * 0.05}
+            distance={32}
           >
-            <span
-              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-              aria-hidden="true"
-            />
-            <span>{capability}</span>
-          </div>
+            <HoverCard className="flex h-full gap-3 rounded-2xl border border-border/75 bg-surface/50 p-5 text-sm text-foreground">
+              <span
+                className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                aria-hidden="true"
+              />
+
+              <span>{capability}</span>
+            </HoverCard>
+          </ScrollReveal>
         ))}
       </div>
     </section>

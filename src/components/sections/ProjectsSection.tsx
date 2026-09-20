@@ -1,4 +1,5 @@
 // src/components/sections/ProjectsSection.tsx
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { projects } from "@/data/portfolio";
@@ -16,18 +17,34 @@ export function ProjectsSection() {
       />
 
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+        {featured.map((project, index) => (
+          <ScrollReveal
+            key={project.slug}
+            className="h-full"
+            delay={index * 0.05}
+            distance={34}
+          >
+            <ProjectCard project={project} />
+          </ScrollReveal>
         ))}
       </div>
 
-      <h3 className="mt-16 font-heading text-xl font-semibold text-foreground">
-        More projects
-      </h3>
+      <ScrollReveal className="mt-16" distance={30}>
+        <h3 className="font-heading text-xl font-semibold text-foreground">
+          More projects
+        </h3>
+      </ScrollReveal>
 
       <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {supporting.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+        {supporting.map((project, index) => (
+          <ScrollReveal
+            key={project.slug}
+            className="h-full"
+            delay={(index % 3) * 0.05}
+            distance={34}
+          >
+            <ProjectCard project={project} />
+          </ScrollReveal>
         ))}
       </div>
     </section>

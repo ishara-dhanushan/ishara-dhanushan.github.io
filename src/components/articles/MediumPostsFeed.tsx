@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from "react";
 import { MediumPostCard } from "@/components/articles/MediumPostCard";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { profile } from "@/data/portfolio";
 import { fetchMediumPosts, getCachedMediumPosts } from "@/lib/medium-feed";
 import type { MediumPost } from "@/lib/medium-feed";
@@ -15,7 +16,7 @@ type FeedStatus = "loading" | "success" | "empty" | "error";
 
 function ArticleSkeleton() {
   return (
-    <div className="h-64 animate-pulse rounded-2xl border border-border bg-surface" />
+    <div className="h-64 animate-pulse rounded-2xl border border-border/75 bg-surface/50" />
   );
 }
 
@@ -68,7 +69,7 @@ export function MediumPostsFeed() {
 
   if (status === "error") {
     return (
-      <div className="mt-10 rounded-2xl border border-danger/40 bg-surface p-6 text-sm text-muted-foreground">
+      <div className="mt-10 rounded-2xl border border-danger/40 bg-surface/50 p-6 text-sm text-muted-foreground">
         Couldn&apos;t load the latest articles right now.{" "}
         <a
           href={profile.socials.medium}
@@ -85,7 +86,7 @@ export function MediumPostsFeed() {
 
   if (status === "empty") {
     return (
-      <div className="mt-10 rounded-2xl border border-border bg-surface p-6 text-sm text-muted-foreground">
+      <div className="mt-10 rounded-2xl border border-border/75 bg-surface/50 p-6 text-sm text-muted-foreground">
         No articles to show yet.{" "}
         <a
           href={profile.socials.medium}
@@ -102,10 +103,15 @@ export function MediumPostsFeed() {
 
   return (
     <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
-        <div key={post.id} className="h-full">
+      {posts.map((post, index) => (
+        <ScrollReveal
+          key={post.id}
+          className="h-full"
+          delay={(index % 3) * 0.05}
+          distance={34}
+        >
           <MediumPostCard post={post} />
-        </div>
+        </ScrollReveal>
       ))}
     </div>
   );

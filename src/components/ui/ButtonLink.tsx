@@ -1,5 +1,7 @@
 // src/components/ui/ButtonLink.tsx
-import Link from "next/link";
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 interface ButtonLinkProps {
@@ -15,20 +17,49 @@ export function ButtonLink({
   variant = "primary",
   external,
 }: ButtonLinkProps) {
+  const reduceMotion = useReducedMotion();
+
   const base =
     "inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-colors";
+
   const styles =
     variant === "primary"
       ? "bg-primary text-primary-foreground hover:bg-primary-hover"
       : "border border-border text-foreground hover:bg-surface-hover";
 
   return (
-    <Link
+    <motion.a
       href={href}
       className={`${base} ${styles}`}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      whileHover={
+        reduceMotion
+          ? undefined
+          : {
+              scale: 1.02,
+              y: -2,
+            }
+      }
+      whileTap={
+        reduceMotion
+          ? undefined
+          : {
+              scale: 0.96,
+            }
+      }
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 30,
+        mass: 0.55,
+      }}
+      {...(external
+        ? {
+            target: "_blank",
+            rel: "noopener noreferrer",
+          }
+        : {})}
     >
       {children}
-    </Link>
+    </motion.a>
   );
 }
