@@ -22,6 +22,24 @@ export function isHomePage() {
   return normalizePath(window.location.pathname) === normalizePath(homeHref);
 }
 
+export function scrollToTop() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.dispatchEvent(
+    new CustomEvent(SECTION_SCROLL_EVENT, {
+      detail: { sectionId: "top" },
+    })
+  );
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+}
+
 export function scrollToSection(sectionId: string) {
   if (typeof window === "undefined") {
     return;
@@ -33,6 +51,11 @@ export function scrollToSection(sectionId: string) {
     } catch {}
 
     window.location.assign(homeHref);
+    return;
+  }
+
+  if (sectionId === "top") {
+    scrollToTop();
     return;
   }
 
