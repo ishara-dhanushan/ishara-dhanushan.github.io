@@ -6,11 +6,21 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 interface MobileMenuProps {
-  links: { href: string; label: string }[];
+  links: {
+    id: string;
+    href: string;
+    label: string;
+  }[];
+
   resumeHref: string;
+  activeSection: string | null;
 }
 
-export function MobileMenu({ links, resumeHref }: MobileMenuProps) {
+export function MobileMenu({
+  links,
+  resumeHref,
+  activeSection,
+}: MobileMenuProps) {
   const [open, setOpen] = useState(false);
 
   const reduceMotion = useReducedMotion();
@@ -21,7 +31,7 @@ export function MobileMenu({ links, resumeHref }: MobileMenuProps) {
         type="button"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => setOpen((previous) => !previous)}
         whileTap={
           reduceMotion
             ? undefined
@@ -34,7 +44,7 @@ export function MobileMenu({ links, resumeHref }: MobileMenuProps) {
           stiffness: 500,
           damping: 30,
         }}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-border/75 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
         {open ? <X size={18} /> : <Menu size={18} />}
       </motion.button>
@@ -66,19 +76,28 @@ export function MobileMenu({ links, resumeHref }: MobileMenuProps) {
               duration: reduceMotion ? 0 : 0.22,
               ease: "easeOut",
             }}
-            className="absolute inset-x-0 top-16 border-b border-border bg-background px-6 py-6"
+            className="absolute inset-x-0 top-16 border-b border-border/75 bg-background/95 px-6 py-6 backdrop-blur"
           >
             <nav className="flex flex-col gap-4">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-base text-muted-foreground hover:text-foreground"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {links.map((link) => {
+                const isActive = activeSection === link.id;
+
+                return (
+                  <a
+                    key={link.id}
+                    href={link.href}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={() => setOpen(false)}
+                    className={`text-base transition-colors duration-200 ${
+                      isActive
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
 
               <a
                 href={resumeHref}
