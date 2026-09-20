@@ -4,6 +4,7 @@ export interface Profile {
   initials: string;
   eyebrow: string;
   headline: string;
+  roles: string[];
   summary: string;
   about: string[];
   location: string;

@@ -16,11 +16,19 @@ export const profile: Profile = {
   initials: "ID",
   eyebrow: "Software Engineer • Full-Stack Development",
   headline: "Building reliable web products and scalable application systems.",
+  roles: [
+    "Full-Stack Developer",
+    "Software Engineer",
+    "Backend & API Developer",
+  ],
   summary:
     "Fourth-year Software Engineering undergraduate with hands-on experience in production web applications, REST APIs, Chrome extensions, secure integrations, and agile delivery.",
   about: [
     "Fourth-year Software Engineering undergraduate based in Kurunegala, Sri Lanka, with practical experience across full-stack web applications, REST APIs, browser extensions, and mobile applications built during a software-engineering internship and a range of individual, group, and client projects.",
+
     "I care about writing maintainable, well-tested code and building products that are genuinely useful to the people who use them. I work well in agile, Git-based teams and I'm always looking for the next thing to learn.",
+
+    "Most of my recent work has focused on TypeScript, React and Next.js on the frontend, Node.js and NestJS on the backend, and PostgreSQL or MongoDB for data. I enjoy working across the full delivery path—from turning product requirements and UI designs into features to API design, debugging, deployment, and release verification.",
   ],
   location: "Kurunegala, Sri Lanka",
   email: "isharadh2002@gmail.com",

@@ -50,17 +50,11 @@ export function Header() {
 
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  /*
-   * True while the browser is smoothly scrolling because the user clicked
-   * an internal hash link. During this period, scroll-spy updates are paused
-   * so intermediate sections do not flash as active.
-   */
+  // Pauses scroll-spy during programmatic smooth scrolling so intermediate sections don't flash.
   const programmaticScrollRef = useRef(false);
 
-  /*
-   * Smooth scrolling emits many scroll events. We use a short debounce to
-   * detect when those events have stopped.
-   */
+  // Smooth scrolling emits many scroll events. We use a short debounce
+  // to detect when those events have actually stopped.
   const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -69,10 +63,8 @@ export function Header() {
     const updateActiveSection = () => {
       animationFrameId = null;
 
-      /*
-       * When we are right at the top of the page, no navbar section should be
-       * highlighted because the user is viewing the hero rather than About.
-       */
+      // When right at the top of the page, no navbar section should be
+      // highlighted because the user is viewing the hero rather than About.
       if (window.scrollY < 80) {
         setActiveSection(null);
         return;
@@ -97,10 +89,8 @@ export function Header() {
         return;
       }
 
-      /*
-       * A point around one-third down the viewport generally represents what
-       * the user is actively reading better than the very top edge.
-       */
+      // A point around one-third down the viewport generally represents what
+      // the user is actively reading better than the very top edge.
       const activationPoint = window.scrollY + window.innerHeight * 0.35;
 
       let currentSection: string | null = null;
@@ -116,10 +106,8 @@ export function Header() {
         }
       }
 
-      /*
-       * Contact can be shorter than the viewport, so explicitly mark it as
-       * active when the bottom of the page has been reached.
-       */
+      // Contact can be shorter than the viewport, so explicitly mark it
+      // as active when the bottom of the page has been reached.
       const reachedPageBottom =
         window.scrollY + window.innerHeight >=
         document.documentElement.scrollHeight - 4;
@@ -145,18 +133,14 @@ export function Header() {
         clearTimeout(scrollEndTimerRef.current);
       }
 
-      /*
-       * Every scroll event resets this timer. It therefore runs only after
-       * smooth scrolling has actually stopped.
-       */
+      // Every scroll event resets this timer. It therefore runs only after
+      // smooth scrolling has actually stopped.
       scrollEndTimerRef.current = setTimeout(finishProgrammaticScroll, 140);
     };
 
     const handleScroll = () => {
-      /*
-       * Keep the clicked destination highlighted while smooth scrolling
-       * passes through intermediate sections.
-       */
+      // Keep the clicked destination highlighted while smooth scrolling
+      // passes through intermediate sections.
       if (programmaticScrollRef.current) {
         scheduleScrollEnd();
         return;
@@ -176,22 +160,15 @@ export function Header() {
         return;
       }
 
-      /*
-       * The actual click may occur on a span/icon inside the anchor, so locate
-       * the closest anchor rather than requiring event.target to be <a>.
-       */
+      // The actual click may occur on a span/icon inside the anchor, so locate
+      // the closest anchor rather than requiring event.target to be <a>.
       const anchor = clickedElement.closest("a[href]");
 
       if (!(anchor instanceof HTMLAnchorElement)) {
         return;
       }
 
-      /*
-       * Only handle same-page navigation here.
-       *
-       * This prevents an unrelated external URL containing "#about", for
-       * example, from accidentally changing the portfolio navbar state.
-       */
+      // Only handle same-page navigation to avoid external URLs altering navbar state.
       const destination = new URL(anchor.href, window.location.href);
 
       const currentLocation = new URL(window.location.href);
@@ -215,35 +192,25 @@ export function Header() {
 
       const isNavigationSection = navLinks.some((link) => link.id === targetId);
 
-      /*
-       * Ignore hashes that are unrelated to the portfolio navigation.
-       */
+      // Ignore hashes that are unrelated to the portfolio navigation.
       if (!isTopLink && !isNavigationSection) {
         return;
       }
 
-      /*
-       * Pause scroll-spy before the browser begins smooth scrolling.
-       */
+      // Pause scroll-spy before the browser begins smooth scrolling.
       programmaticScrollRef.current = true;
 
       if (isTopLink) {
-        /*
-         * The hero/top area has no navbar title, so clear the active state.
-         */
+        // The hero/top area has no navbar title, so clear the active state.
         setActiveSection(null);
       } else {
-        /*
-         * Highlight the destination immediately. It will remain highlighted
-         * while the page smoothly scrolls toward it.
-         */
+        // Highlight the destination immediately. It will remain highlighted
+        // while the page smoothly scrolls toward it.
         setActiveSection(targetId);
       }
 
-      /*
-       * Handles cases where almost no scrolling occurs because the target is
-       * already very close to the current position.
-       */
+      // Handles cases where almost no scrolling occurs because the target
+      // is already very close to the current position.
       if (scrollEndTimerRef.current !== null) {
         clearTimeout(scrollEndTimerRef.current);
       }
@@ -253,10 +220,8 @@ export function Header() {
 
     updateActiveSection();
 
-    /*
-     * Capture-phase listening means every same-page hash link is detected,
-     * even when the clicked component also has its own click handler.
-     */
+    // Capture-phase listening means every same-page hash link is detected,
+    // even when the clicked component also has its own click handler.
     document.addEventListener("click", handleInternalNavigation, true);
 
     window.addEventListener("scroll", handleScroll, {

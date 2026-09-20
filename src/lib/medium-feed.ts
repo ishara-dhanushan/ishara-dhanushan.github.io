@@ -124,10 +124,8 @@ function decodeHtmlEntities(str: string): string {
 }
 
 /**
- * Extracts the primary cover image URL from an article item.
- * Checks the thumbnail field, enclosure links, and <img> tags in the HTML body,
- * while explicitly ignoring Medium's tracking pixels so posts without images
- * fall back cleanly to the brand gradient.
+ * Extracts primary cover image from thumbnail, enclosure, or HTML body,
+ * ignoring tracking pixels to allow fallback to brand gradient.
  */
 function extractCoverImage(item: RawFeedItem, html: string): string | null {
   // 1. Check thumbnail property
@@ -162,9 +160,7 @@ function extractCoverImage(item: RawFeedItem, html: string): string | null {
 }
 
 /**
- * Normalizes raw date strings into valid ISO-8601 strings.
- * Converts "YYYY-MM-DD HH:mm:ss" space-separated dates into "YYYY-MM-DDTHH:mm:ssZ"
- * for consistent parsing across all browser engines (especially Safari/iOS WebKit).
+ * Normalizes dates to ISO-8601 ("YYYY-MM-DDTHH:mm:ssZ") for cross-browser parsing.
  */
 function parsePubDate(pubDateStr: string): string {
   if (!pubDateStr) return "";
@@ -271,12 +267,8 @@ function isCacheFresh(cache: CacheShape): boolean {
 }
 
 /**
- * Fetches the latest Medium articles from the configured RSS endpoint.
- * - Enforces an 8-second request timeout.
- * - Validates response status and deserializes items.
- * - Sorts posts in descending chronological order.
- * - Updates localStorage cache on success.
- * - Seamlessly falls back to cached posts if the network request fails.
+ * Fetches latest Medium articles with 8s timeout, caching in localStorage
+ * and falling back to cached posts on failure.
  */
 export async function fetchMediumPosts(): Promise<MediumFeedResult> {
   const cache = readCache();
