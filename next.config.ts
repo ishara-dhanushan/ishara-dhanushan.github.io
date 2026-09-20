@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
 
   // Only needed if deploying to https://<username>.github.io/<repo-name>/
   // Omit both if this repo is named <username>.github.io (root site)
-  basePath: isProduction ? assetPrefix : undefined,
-  assetPrefix: isProduction ? assetPrefix : undefined,
+  basePath: isProduction && assetPrefix ? assetPrefix : undefined,
+  assetPrefix: isProduction && assetPrefix ? assetPrefix : undefined,
 
   images: {
     unoptimized: true, // required — no server to run image optimization
