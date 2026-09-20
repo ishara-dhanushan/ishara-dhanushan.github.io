@@ -29,6 +29,7 @@ export interface Experience {
   stack: string[];
   summary: string;
   highlights: string[];
+  logo?: string;
 }
 
 export interface ProjectLinks {

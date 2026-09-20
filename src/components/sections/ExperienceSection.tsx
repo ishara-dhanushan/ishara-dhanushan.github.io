@@ -1,4 +1,5 @@
 // src/components/sections/ExperienceSection.tsx
+import Image from "next/image";
 import { HoverCard } from "@/components/motion/HoverCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -12,17 +13,33 @@ export function ExperienceSection() {
 
       <ScrollReveal className="mt-10" distance={34}>
         <HoverCard className="rounded-2xl border border-border/75 bg-surface/50 p-8">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 className="font-heading text-xl font-semibold text-foreground">
-              {experience.role} · {experience.company}
-            </h3>
+          <div className="flex items-start gap-4 sm:gap-5">
+            {experience.logo && (
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white p-2.5 shadow-sm sm:h-16 sm:w-16 sm:p-3">
+                <Image
+                  src={experience.logo}
+                  alt={`${experience.company} logo`}
+                  className="h-full w-full object-contain"
+                  width={128}
+                  height={128}
+                />
+              </div>
+            )}
 
-            <span className="font-mono text-sm text-muted-foreground">
-              {experience.period}
-            </span>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="font-heading text-xl font-semibold text-foreground">
+                  {experience.role} · {experience.company}
+                </h3>
+
+                <span className="font-mono text-sm text-muted-foreground">
+                  {experience.period}
+                </span>
+              </div>
+
+              <p className="mt-2 text-muted-foreground">{experience.summary}</p>
+            </div>
           </div>
-
-          <p className="mt-4 text-muted-foreground">{experience.summary}</p>
 
           <ul className="mt-6 space-y-2">
             {experience.highlights.map((item) => (

@@ -57,6 +57,7 @@ export const proofItems: ProofItem[] = [
 export const experience: Experience = {
   role: "Software Engineering Intern",
   company: "ByteSquad Labs",
+  logo: `${assetPrefix}/logos/ByteSquad_Logo.svg`,
   period: "September 2025 – March 2026",
   stack: ["Next.js", "React", "TypeScript", "Node.js", "Express.js", "MongoDB"],
   summary:
