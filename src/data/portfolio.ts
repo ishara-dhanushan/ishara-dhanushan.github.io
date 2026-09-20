@@ -89,7 +89,10 @@ export const projects: Project[] = [
     ],
     featured: true,
     hasCaseStudy: true,
-    links: {},
+    links: {
+      github: "https://github.com/orgs/ConstructPro-ERP/repositories",
+      demo: "https://construct-pro-teal.vercel.app/",
+    },
   },
   {
     slug: "kochi-guru-pizza",
@@ -101,7 +104,10 @@ export const projects: Project[] = [
     stack: ["Next.js", "Express.js", "MongoDB", "JWT"],
     featured: true,
     hasCaseStudy: true,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/kochi-guru-pizza",
+      demo: "https://www.kochigurupizza.com",
+    },
   },
   {
     slug: "fuelwise",
@@ -113,7 +119,9 @@ export const projects: Project[] = [
     stack: ["Spring Boot", "React", "Flutter", "MySQL"],
     featured: true,
     hasCaseStudy: true,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/FuelWiseLK",
+    },
   },
   {
     slug: "brewhub",
@@ -125,7 +133,10 @@ export const projects: Project[] = [
     stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/BrewHub",
+      demo: "https://brew-hub.vercel.app/",
+    },
   },
   {
     slug: "advertisement-lk",
@@ -137,7 +148,9 @@ export const projects: Project[] = [
     stack: ["React.js", "Node.js", "Express.js", "MongoDB"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/Advertisement.lk",
+    },
   },
   {
     slug: "multi-role-user-registration",
@@ -149,7 +162,10 @@ export const projects: Project[] = [
     stack: ["Spring Boot", "Next.js", "Java", "MySQL"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github:
+        "https://github.com/ishara-dhanushan/Multi-Role-User-Sign-Up-Form",
+    },
   },
   {
     slug: "findyourmechanic-lk",
@@ -161,7 +177,9 @@ export const projects: Project[] = [
     stack: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/findyourmechanic.lk",
+    },
   },
   {
     slug: "finance-tracker-app",
@@ -184,7 +202,9 @@ export const projects: Project[] = [
     stack: ["React Native", "Zustand", "AsyncStorage"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/TaskMaster",
+    },
   },
   {
     slug: "habitbuddy",
@@ -195,7 +215,9 @@ export const projects: Project[] = [
     stack: ["React Native", "Zustand", "AsyncStorage"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      github: "https://github.com/ishara-dhanushan/HabitBuddy",
+    },
   },
   {
     slug: "bookhub",
@@ -207,7 +229,10 @@ export const projects: Project[] = [
     stack: ["Figma"],
     featured: false,
     hasCaseStudy: false,
-    links: {},
+    links: {
+      figma:
+        "https://www.figma.com/design/AL9NglUXMEOxTPeL9Si6tb/Library-Management-System--User-Interfaces-?node-id=607-9&t=zL8FyXJsijK5CMHA-1",
+    },
   },
 ];
 
