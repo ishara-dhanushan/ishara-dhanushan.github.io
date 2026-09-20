@@ -1,7 +1,7 @@
-// src/components/motion/ScrollReveal.tsx
 "use client";
 
 import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
 import { useScrollDirectionRef } from "@/components/motion/ScrollDirectionProvider";
 
@@ -23,14 +23,12 @@ export function ScrollReveal({
   const elementRef = useRef<HTMLDivElement>(null);
 
   const visibleRef = useRef(false);
-
-  const hasReachedRevealThresholdRef = useRef(false);
+  const frameRef = useRef<number | null>(null);
 
   const controls = useAnimationControls();
-
   const reduceMotion = useReducedMotion();
-
   const scrollDirectionRef = useScrollDirectionRef();
+  const pathname = usePathname();
 
   useEffect(() => {
     const element = elementRef.current;
@@ -39,132 +37,167 @@ export function ScrollReveal({
       return;
     }
 
-    if (reduceMotion) {
-      visibleRef.current = true;
-
-      controls.set({
-        opacity: 1,
-        y: 0,
-      });
-
-      return;
-    }
-
-    if (element.dataset.scrollRevealRestored === "true") {
-      visibleRef.current = true;
-
-      delete element.dataset.scrollRevealRestored;
-
-      controls.set({
-        opacity: 1,
-        y: 0,
-      });
-    }
-
     const revealThreshold = Math.min(Math.max(amount, 0), 1);
 
     const hideThreshold = revealThreshold * 0.5;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) {
-          return;
-        }
-
-        if (element.dataset.scrollRevealRestored === "true") {
-          visibleRef.current = true;
-
-          delete element.dataset.scrollRevealRestored;
-        }
-
-        const direction = scrollDirectionRef.current;
-
-        const visibleAmount = entry.intersectionRatio;
-
-        const elementTop = entry.boundingClientRect.top;
-
-        const firstVisibleIntersection =
-          !hasReachedRevealThresholdRef.current &&
-          visibleAmount >= revealThreshold;
-
-        if (visibleAmount >= revealThreshold) {
-          hasReachedRevealThresholdRef.current = true;
-        }
-
-        // Allow the first viewport intersection after client-side navigation.
-        if (
-          (direction === "down" || firstVisibleIntersection) &&
-          visibleAmount >= revealThreshold &&
-          !visibleRef.current
-        ) {
-          visibleRef.current = true;
-
-          controls.stop();
-
-          void controls.start({
-            opacity: 1,
-            y: 0,
-            transition: {
-              duration: 0.5,
-              delay,
-              ease: "easeOut",
-            },
-          });
-
-          return;
-        }
-
-        // Recover hidden content when re-entering from the top.
-        if (
-          direction === "up" &&
-          entry.isIntersecting &&
-          elementTop <= 0 &&
-          !visibleRef.current
-        ) {
-          visibleRef.current = true;
-
-          controls.stop();
-
-          controls.set({
-            opacity: 1,
-            y: 0,
-          });
-
-          return;
-        }
-
-        // Hide only while scrolling upward and leaving through the bottom.
-        if (
-          direction === "up" &&
-          visibleAmount <= hideThreshold &&
-          elementTop > 0 &&
-          visibleRef.current
-        ) {
-          visibleRef.current = false;
-
-          controls.stop();
-
-          void controls.start({
-            opacity: 0,
-            y: distance,
-            transition: {
-              duration: 0.3,
-              ease: "easeIn",
-            },
-          });
-        }
-      },
-      {
-        threshold: [0, hideThreshold, revealThreshold, 1],
+    const show = (animate: boolean) => {
+      if (visibleRef.current) {
+        return;
       }
-    );
+
+      visibleRef.current = true;
+      controls.stop();
+
+      if (!animate) {
+        controls.set({
+          opacity: 1,
+          y: 0,
+        });
+
+        return;
+      }
+
+      void controls.start({
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.5,
+          delay,
+          ease: "easeOut",
+        },
+      });
+    };
+
+    const hide = () => {
+      if (!visibleRef.current) {
+        return;
+      }
+
+      visibleRef.current = false;
+      controls.stop();
+
+      void controls.start({
+        opacity: 0,
+        y: distance,
+        transition: {
+          duration: 0.3,
+          ease: "easeIn",
+        },
+      });
+    };
+
+    if (reduceMotion) {
+      show(false);
+      return;
+    }
+
+    if (element.dataset.scrollRevealRestored === "true") {
+      delete element.dataset.scrollRevealRestored;
+
+      show(false);
+    } else {
+      visibleRef.current = false;
+
+      controls.set({
+        opacity: 0,
+        y: distance,
+      });
+    }
+
+    const evaluateVisibility = () => {
+      frameRef.current = null;
+
+      const rect = element.getBoundingClientRect();
+
+      const viewportHeight = window.innerHeight;
+
+      const visibleTop = Math.max(rect.top, 0);
+
+      const visibleBottom = Math.min(rect.bottom, viewportHeight);
+
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+      const referenceHeight = Math.min(rect.height, viewportHeight);
+
+      const visibleAmount =
+        referenceHeight > 0 ? visibleHeight / referenceHeight : 0;
+
+      const direction = scrollDirectionRef.current;
+
+      if (visibleAmount >= revealThreshold) {
+        show(true);
+        return;
+      }
+
+      // Content coming back through the top should already feel discovered.
+      if (direction === "up" && rect.top <= 0 && rect.bottom > 0) {
+        show(false);
+        return;
+      }
+
+      // Only hide when scrolling upward and the element leaves through the bottom.
+      if (
+        direction === "up" &&
+        visibleAmount <= hideThreshold &&
+        rect.top > 0
+      ) {
+        hide();
+      }
+    };
+
+    const scheduleEvaluation = () => {
+      if (frameRef.current !== null) {
+        return;
+      }
+
+      frameRef.current = window.requestAnimationFrame(evaluateVisibility);
+    };
+
+    const observer = new IntersectionObserver(scheduleEvaluation, {
+      threshold: [0, hideThreshold, revealThreshold, 1],
+    });
 
     observer.observe(element);
 
+    const firstFrame = window.requestAnimationFrame(evaluateVisibility);
+
+    let secondFrame: number | null = null;
+
+    secondFrame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(evaluateVisibility);
+    });
+
+    window.addEventListener("scroll", scheduleEvaluation, { passive: true });
+
+    window.addEventListener("resize", scheduleEvaluation);
+
     return () => {
       observer.disconnect();
+
+      window.removeEventListener("scroll", scheduleEvaluation);
+
+      window.removeEventListener("resize", scheduleEvaluation);
+
+      window.cancelAnimationFrame(firstFrame);
+
+      if (secondFrame !== null) {
+        window.cancelAnimationFrame(secondFrame);
+      }
+
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
     };
-  }, [amount, controls, delay, distance, reduceMotion, scrollDirectionRef]);
+  }, [
+    amount,
+    controls,
+    delay,
+    distance,
+    pathname,
+    reduceMotion,
+    scrollDirectionRef,
+  ]);
 
   return (
     <motion.div
