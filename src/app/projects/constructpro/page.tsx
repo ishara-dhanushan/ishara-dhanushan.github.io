@@ -9,10 +9,21 @@ import { CaseStudyNavigation } from "@/components/case-study/CaseStudyNavigation
 import { CaseStudySection } from "@/components/case-study/CaseStudySection";
 import { getProjectBySlug } from "@/data/portfolio";
 
+const title = "ConstructPro ERP Case Study";
+const description =
+  "Engineering case study for ConstructPro ERP, covering NestJS services, quotation-to-project workflows, Prisma migrations, Neon PostgreSQL, authentication, testing, and delivery.";
+
 export const metadata: Metadata = {
-  title: "ConstructPro ERP Case Study",
-  description:
-    "Engineering case study for ConstructPro ERP, covering NestJS services, quotation-to-project workflows, Prisma migrations, Neon PostgreSQL, authentication, testing, and delivery.",
+  title,
+  description,
+  alternates: { canonical: "/projects/constructpro" },
+  openGraph: {
+    title,
+    description,
+    url: "/projects/constructpro",
+    type: "article",
+  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const project = getProjectBySlug("constructpro");

@@ -5,6 +5,8 @@ import { AnimatedBackground } from "@/components/background/AnimatedBackground";
 import { ScrollDirectionProvider } from "@/components/motion/ScrollDirectionProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
+import { siteUrl } from "@/utils/siteUrl";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -24,13 +26,46 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const title = {
+  default: "Ishara Dhanushan — Software Engineer",
+  template: "%s | Ishara Dhanushan",
+};
+const description =
+  "Ishara Dhanushan's software engineering portfolio, featuring full-stack applications, REST APIs, backend systems, and mobile projects.";
+
 export const metadata: Metadata = {
-  title: {
-    default: "Ishara Dhanushan — Software Engineer",
-    template: "%s | Ishara Dhanushan",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  keywords: [
+    "Ishara Dhanushan",
+    "Software Engineer",
+    "Full-Stack Developer",
+    "Next.js Developer",
+    "React Developer",
+    "University of Kelaniya",
+    "Sri Lanka Software Engineer",
+  ],
+  authors: [{ name: "Ishara Dhanushan", url: siteUrl }],
+  creator: "Ishara Dhanushan",
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
-  description:
-    "Ishara Dhanushan's software engineering portfolio, featuring full-stack applications, REST APIs, backend systems, and mobile projects.",
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Ishara Dhanushan",
+    title: title.default,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: title.default,
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -44,6 +79,7 @@ export default function RootLayout({
       className={`${poppins.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        <PersonJsonLd />
         <AnimatedBackground />
 
         <ScrollDirectionProvider>

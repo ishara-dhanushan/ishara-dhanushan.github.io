@@ -34,7 +34,7 @@ jobs:
       - name: Check linting
         run: npm run lint
 
-      - name: Build
+      - name: Build Next.js app
         env:
           NEXT_PUBLIC_ASSET_PREFIX: ${{ secrets.NEXT_PUBLIC_ASSET_PREFIX }}
           NEXT_PUBLIC_IS_EXPORT: ${{ secrets.NEXT_PUBLIC_IS_EXPORT }}

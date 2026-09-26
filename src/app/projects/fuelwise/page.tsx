@@ -7,10 +7,16 @@ import { CaseStudyNavigation } from "@/components/case-study/CaseStudyNavigation
 import { CaseStudySection } from "@/components/case-study/CaseStudySection";
 import { getProjectBySlug } from "@/data/portfolio";
 
+const title = "FuelWise.lk Case Study";
+const description =
+  "Multi-platform fuel quota management case study covering React, Spring Boot, Flutter, MySQL, quota workflows, transaction handling, and external vehicle validation.";
+
 export const metadata: Metadata = {
-  title: "FuelWise.lk Case Study",
-  description:
-    "Multi-platform fuel quota management case study covering React, Spring Boot, Flutter, MySQL, quota workflows, transaction handling, and external vehicle validation.",
+  title,
+  description,
+  alternates: { canonical: "/projects/fuelwise" },
+  openGraph: { title, description, url: "/projects/fuelwise", type: "article" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const project = getProjectBySlug("fuelwise");
