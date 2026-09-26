@@ -7,10 +7,21 @@ import { CaseStudyNavigation } from "@/components/case-study/CaseStudyNavigation
 import { CaseStudySection } from "@/components/case-study/CaseStudySection";
 import { getProjectBySlug } from "@/data/portfolio";
 
+const title = "Kochi Guru Pizza Case Study";
+const description =
+  "Full-stack client-project case study covering Next.js, Express, MongoDB, authentication, menu management, Cloudflare R2 media storage, Docker, CI, and performance work.";
+
 export const metadata: Metadata = {
-  title: "Kochi Guru Pizza Case Study",
-  description:
-    "Full-stack client-project case study covering Next.js, Express, MongoDB, authentication, menu management, Cloudflare R2 media storage, Docker, CI, and performance work.",
+  title,
+  description,
+  alternates: { canonical: "/projects/kochi-guru-pizza" },
+  openGraph: {
+    title,
+    description,
+    url: "/projects/kochi-guru-pizza",
+    type: "article",
+  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const project = getProjectBySlug("kochi-guru-pizza");
