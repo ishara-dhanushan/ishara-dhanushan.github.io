@@ -27,7 +27,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const title = {
-  default: "Ishara Dhanushan — Software Engineer",
+  default: "Ishara Dhanushan's Portfolio",
   template: "%s | Ishara Dhanushan",
 };
 const description =
