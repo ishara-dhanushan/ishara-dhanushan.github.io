@@ -233,7 +233,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => handleNavigate("top")}
-          className="font-heading text-lg font-semibold text-foreground"
+          className="font-heading text-lg font-semibold text-foreground transition-colors duration-300 hover:text-muted-foreground"
         >
           {profile.initials}
         </button>
