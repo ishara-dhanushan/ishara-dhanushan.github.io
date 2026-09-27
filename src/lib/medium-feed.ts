@@ -334,7 +334,7 @@ export async function fetchMediumPosts(
     writeCache(posts);
 
     if (typeof window === "undefined" && NODE_ENV === "production") {
-      console.log(`Successfully fetched ${posts.length} Medium post(s).`);
+      console.log(`Successfully fetched ${posts.length} Medium posts.`);
     }
 
     return { posts, servedFromCache: false, error: null };

@@ -1,6 +1,7 @@
 // src/components/articles/MediumPostCard.tsx
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import type { MediumPost } from "@/lib/medium-feed";
@@ -40,13 +41,14 @@ export function MediumPostCard({ post }: { post: MediumPost }) {
         mass: 0.65,
       }}
     >
-      <div className="aspect-video w-full overflow-hidden bg-background">
+      <div className="relative aspect-video w-full overflow-hidden bg-background">
         {showImage ? (
-          <img
+          <Image
             src={post.coverImage as string}
-            alt=""
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.025]"
+            alt={post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.025]"
             onError={() => setImageFailed(true)}
           />
         ) : (

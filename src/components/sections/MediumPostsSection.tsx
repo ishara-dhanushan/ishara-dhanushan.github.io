@@ -28,9 +28,11 @@ export async function MediumPostsSection() {
             href={profile.socials.medium}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-block text-sm font-medium text-primary transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-primary-hover"
+            className="group mt-6 inline-block text-sm font-medium text-primary transition-colors duration-200 hover:text-primary-hover"
           >
-            View all articles on Medium
+            <span className="inline-block transition-transform duration-200 group-hover:-translate-y-0.5">
+              View all articles on Medium
+            </span>
           </a>
         </ScrollReveal>
       </div>
