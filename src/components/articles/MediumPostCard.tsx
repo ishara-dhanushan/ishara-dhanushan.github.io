@@ -7,7 +7,6 @@ import type { MediumPost } from "@/lib/medium-feed";
 
 export function MediumPostCard({ post }: { post: MediumPost }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   const reduceMotion = useReducedMotion();
 
@@ -43,25 +42,11 @@ export function MediumPostCard({ post }: { post: MediumPost }) {
     >
       <div className="aspect-video w-full overflow-hidden bg-background">
         {showImage ? (
-          <motion.img
+          <img
             src={post.coverImage as string}
             alt=""
             loading="lazy"
-            initial={
-              reduceMotion
-                ? false
-                : {
-                    opacity: 0,
-                  }
-            }
-            animate={{
-              opacity: imageLoaded ? 1 : 0,
-            }}
-            transition={{
-              duration: reduceMotion ? 0 : 0.3,
-            }}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.025]"
-            onLoad={() => setImageLoaded(true)}
             onError={() => setImageFailed(true)}
           />
         ) : (
