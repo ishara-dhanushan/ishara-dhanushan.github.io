@@ -9,9 +9,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "format:out": "prettier --write out/ --ignore-path",
-    "build:windows": "npm run build && npm run format:out && powershell -Command \"if (Test-Path 'my-portfolio') { Remove-Item -Recurse -Force my-portfolio }; Move-Item out my-portfolio\"",
-    "build:linux": "npm run build && npm run format:out && rm -rf my-portfolio && mv out my-portfolio"
+    "build:windows": "npm run build && powershell -Command \"if (Test-Path 'my-portfolio') { Remove-Item -Recurse -Force my-portfolio }; Move-Item out my-portfolio\"",
+    "build:linux": "npm run build && rm -rf my-portfolio && mv out my-portfolio"
   },
   "dependencies": {
     "framer-motion": "^12.43.0",

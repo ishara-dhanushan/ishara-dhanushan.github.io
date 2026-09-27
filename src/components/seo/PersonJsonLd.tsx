@@ -17,7 +17,10 @@ export function PersonJsonLd() {
         "@id": websiteId,
         url: `${siteUrl}/`,
         name: profile.name,
-        alternateName: "ishara-dhanushan.github.io",
+        alternateName: [
+          "Ishara Dhanushan Portfolio",
+          "ishara-dhanushan.github.io",
+        ],
         creator: {
           "@id": personId,
         },

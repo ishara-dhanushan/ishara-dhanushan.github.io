@@ -40,6 +40,3 @@ jobs:
           NEXT_PUBLIC_IS_EXPORT: ${{ vars.NEXT_PUBLIC_IS_EXPORT }}
           NEXT_PUBLIC_MEDIUM_FEED_API_URL: ${{ vars.NEXT_PUBLIC_MEDIUM_FEED_API_URL }}
         run: npm run build
-
-      - name: Format build output
-        run: npm run format:out
