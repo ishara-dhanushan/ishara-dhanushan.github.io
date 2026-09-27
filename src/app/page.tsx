@@ -13,11 +13,26 @@ import { CredentialsSection } from "@/components/sections/CredentialsSection";
 import { MediumPostsSection } from "@/components/sections/MediumPostsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
+const title = "Ishara Dhanushan | Software Engineer & Full-Stack Developer";
+
+const description =
+  "Ishara Dhanushan's software engineering portfolio, featuring full-stack applications, REST APIs, backend systems, and mobile projects.";
+
 export const metadata: Metadata = {
-  title: "Ishara Dhanushan | Software Engineer & Full-Stack Developer",
-  description:
-    "Ishara Dhanushan's software engineering portfolio, featuring full-stack applications, REST APIs, backend systems, and mobile projects.",
+  title,
+  description,
   alternates: { canonical: "/" },
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function HomePage() {
