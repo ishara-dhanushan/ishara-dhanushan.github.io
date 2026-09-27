@@ -1,9 +1,9 @@
 "use client";
 
 // src/components/articles/MediumPostsFeed.tsx
-// Client Component: this is the intentional exception to the static site.
-// It loads Medium articles in the visitor's browser after hydration, on
-// every page load, so new posts show up without a GitHub Actions redeploy.
+// Client Component: receives build-time Medium posts for the initial static
+// HTML, then refreshes them in the visitor's browser after hydration so new
+// publications appear without requiring a GitHub Pages redeployment.
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MediumPostCard } from "@/components/articles/MediumPostCard";
@@ -14,6 +14,10 @@ import type { MediumPost } from "@/lib/medium-feed";
 
 type FeedStatus = "loading" | "success" | "empty" | "error";
 
+interface MediumPostsFeedProps {
+  initialPosts: MediumPost[];
+}
+
 function ArticleSkeleton() {
   return (
     <div className="h-64 animate-pulse rounded-2xl border border-border/75 bg-surface/50" />
@@ -23,19 +27,23 @@ function ArticleSkeleton() {
 let memoryPosts: MediumPost[] | null = null;
 let memoryStatus: FeedStatus | null = null;
 
-export function MediumPostsFeed() {
-  const [posts, setPosts] = useState<MediumPost[]>(() => memoryPosts ?? []);
+export function MediumPostsFeed({ initialPosts }: MediumPostsFeedProps) {
+  const startingPosts = memoryPosts ?? initialPosts;
+
+  const [posts, setPosts] = useState<MediumPost[]>(() => startingPosts);
   const [status, setStatus] = useState<FeedStatus>(
-    () =>
-      memoryStatus ??
-      (memoryPosts && memoryPosts.length > 0 ? "success" : "loading")
+    () => memoryStatus ?? (startingPosts.length > 0 ? "success" : "loading")
   );
+
   const fetchedRef = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
 
     const cached = getCachedMediumPosts();
+
+    // Prefer cached posts after hydration until fresh data is fetched from the API,
+    // since the cache may contain newer articles than the last static build.
     if (!memoryPosts && cached && cached.length > 0) {
       queueMicrotask(() => {
         if (!cancelled) {
@@ -49,6 +57,7 @@ export function MediumPostsFeed() {
 
     async function load() {
       const result = await fetchMediumPosts();
+
       if (cancelled) return;
 
       if (result.posts.length > 0) {
@@ -56,13 +65,20 @@ export function MediumPostsFeed() {
         memoryStatus = "success";
         setPosts(result.posts);
         setStatus("success");
-      } else if (!memoryPosts && (!cached || cached.length === 0)) {
+      } else if (
+        !memoryPosts &&
+        initialPosts.length === 0 &&
+        (!cached || cached.length === 0)
+      ) {
         const nextStatus = result.error ? "error" : "empty";
+
         memoryStatus = nextStatus;
         setStatus(nextStatus);
       }
     }
 
+    // initialPosts deliberately does not stop this request. The static posts are
+    // the SEO/fallback content; this request replaces them with the newest feed.
     if (!fetchedRef.current && !memoryPosts) {
       fetchedRef.current = true;
       load();
@@ -71,7 +87,7 @@ export function MediumPostsFeed() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initialPosts]);
 
   const skeletons = useMemo(
     () => (

@@ -1,7 +1,7 @@
 // src/lib/medium-feed.ts
-// Browser-only adapter for the runtime Medium feed. Per the implementation
-// plan (6.4), this must never run at build time — it is called exclusively
-// from the MediumPostsFeed Client Component after hydration.
+// Shared Medium feed adapter. It supports build-time pre-rendering and
+// runtime browser refreshes while keeping browser-only storage access guarded.
+// Runtime requests stay uncached so visitors can receive the newest articles.
 
 export interface MediumPost {
   id: string;
@@ -29,6 +29,7 @@ const EXCERPT_LENGTH = 160;
 // Worker, etc.) can be swapped without touching any component.
 const FEED_ENDPOINT = process.env.NEXT_PUBLIC_MEDIUM_FEED_API_URL ?? "";
 const MAX_ITEMS = 6;
+const NODE_ENV = process.env.NODE_ENV;
 
 interface CacheShape {
   cachedAt: number;
@@ -267,10 +268,13 @@ function isCacheFresh(cache: CacheShape): boolean {
 }
 
 /**
- * Fetches latest Medium articles with 8s timeout, caching in localStorage
- * and falling back to cached posts on failure.
+ * Fetches latest Medium articles with an 8s timeout.
+ * Browser callers use localStorage fallback, while build-time callers safely
+ * skip browser storage and can opt into build-time request caching.
  */
-export async function fetchMediumPosts(): Promise<MediumFeedResult> {
+export async function fetchMediumPosts(
+  requestCache: RequestCache = "no-store"
+): Promise<MediumFeedResult> {
   const cache = readCache();
 
   if (!FEED_ENDPOINT) {
@@ -285,12 +289,16 @@ export async function fetchMediumPosts(): Promise<MediumFeedResult> {
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
   try {
+    if (typeof window === "undefined" && NODE_ENV === "production") {
+      console.log("Fetching Medium feed from:", FEED_ENDPOINT);
+    }
     const response = await fetch(FEED_ENDPOINT, {
       signal: controller.signal,
-      cache: "no-store",
+      cache: requestCache,
     });
 
     if (!response.ok) {
+      console.warn(`Feed request failed with status ${response.status}`);
       throw new Error(`Feed request failed with status ${response.status}`);
     }
 
@@ -324,6 +332,11 @@ export async function fetchMediumPosts(): Promise<MediumFeedResult> {
     }
 
     writeCache(posts);
+
+    if (typeof window === "undefined" && NODE_ENV === "production") {
+      console.log(`Successfully fetched ${posts.length} Medium post(s).`);
+    }
+
     return { posts, servedFromCache: false, error: null };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";

@@ -5,7 +5,6 @@ import { AnimatedBackground } from "@/components/background/AnimatedBackground";
 import { ScrollDirectionProvider } from "@/components/motion/ScrollDirectionProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 import { siteUrl } from "@/utils/siteUrl";
 import "./globals.css";
 
@@ -79,7 +78,6 @@ export default function RootLayout({
       className={`${poppins.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <PersonJsonLd />
         <AnimatedBackground />
 
         <ScrollDirectionProvider>
