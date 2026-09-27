@@ -1,12 +1,17 @@
 // src/components/sections/MediumPostsSection.tsx
+import { MediumPostsFeed } from "@/components/articles/MediumPostsFeed";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { MediumPostsFeed } from "@/components/articles/MediumPostsFeed";
 import { profile } from "@/data/portfolio";
+import { fetchMediumPosts } from "@/lib/medium-feed";
 
-// Server Component: renders the static heading/layout and the section
-// wrapper. Only MediumPostsFeed (a Client Component) fetches at runtime.
-export function MediumPostsSection() {
+// Server Component: fetches Medium posts during the static build so article
+// content exists in the generated HTML. MediumPostsFeed then refreshes those
+// posts in the browser after hydration to show newer publications.
+export async function MediumPostsSection() {
+  const buildFeed = await fetchMediumPosts("force-cache");
+  const initialPosts = buildFeed.posts;
+
   return (
     <section id="articles">
       <div className="mx-auto max-w-300 px-6 py-20">
@@ -16,7 +21,7 @@ export function MediumPostsSection() {
           description="Recent articles, loaded live from Medium."
         />
 
-        <MediumPostsFeed />
+        <MediumPostsFeed initialPosts={initialPosts} />
 
         <ScrollReveal distance={28}>
           <a
