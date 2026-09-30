@@ -17,7 +17,7 @@ export function ContactSection() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <ButtonAnchor href={`mailto:${profile.email}`}>
+            <ButtonAnchor href={`mailto:${profile.email}`} external>
               Email me
             </ButtonAnchor>
 
@@ -35,6 +35,14 @@ export function ContactSection() {
               external
             >
               LinkedIn
+            </ButtonAnchor>
+
+            <ButtonAnchor
+              href={profile.socials.whatsapp}
+              variant="secondary"
+              external
+            >
+              WhatsApp
             </ButtonAnchor>
           </div>
         </div>

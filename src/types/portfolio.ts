@@ -14,6 +14,7 @@ export interface Profile {
     github: string;
     linkedin: string;
     medium: string;
+    whatsapp: string;
   };
 }
 

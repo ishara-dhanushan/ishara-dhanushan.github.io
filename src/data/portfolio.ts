@@ -37,6 +37,7 @@ export const profile: Profile = {
     github: "https://github.com/ishara-dhanushan",
     linkedin: "https://www.linkedin.com/in/ishara-dhanushan",
     medium: "https://medium.com/@isharadh2002",
+    whatsapp: "https://wa.me/94713792052",
   },
 };
 
